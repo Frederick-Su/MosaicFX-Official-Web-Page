@@ -421,12 +421,67 @@ strong {
 
 /* The coin: the brand's only illustration, with 0.25× clear space beneath it. */
 .hero__coin {
-    width: clamp(95px, 12.5vh, 140px);
-    height: auto;
+    width: clamp(190px, 25vh, 280px);
+    margin-bottom: clamp(36px, 5vh, 56px);
+}
+
+/* Pointer-reactive coin. JS sets --mx/--my (where the cursor is, 0–1) and --tilt-x/--tilt-y.
+   The side under the cursor sinks away as if pressed, and the gold catches the light there. */
+.coin {
+    --mx: 0.5;
+    --my: 0.35;
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    --lit: 0;
+    position: relative;
+    display: block;
     aspect-ratio: 1;
-    margin-bottom: clamp(24px, 3.2vh, 36px);
     border-radius: var(--radius-pill);
     box-shadow: var(--glow-coin);
+    transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transition:
+        transform var(--duration-slow) var(--ease-out-soft),
+        box-shadow var(--duration-glow) var(--ease-out-soft);
+}
+
+.coin img {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-pill);
+}
+
+.coin.is-active {
+    box-shadow:
+        0 0 70px rgba(242, 200, 121, 0.42),
+        0 0 140px rgba(242, 200, 121, 0.16);
+    transition:
+        transform var(--duration-base) var(--ease-out-soft),
+        box-shadow var(--duration-glow) var(--ease-out-soft);
+}
+
+/* The gleam: a warm hotspot where the cursor presses, plus a sheen band that slides with it. */
+.coin__sheen {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-pill);
+    background:
+        radial-gradient(
+            circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
+            rgba(242, 200, 121, 0.95),
+            rgba(242, 200, 121, 0.38) 22%,
+            rgba(242, 200, 121, 0.08) 45%,
+            transparent 62%
+        ),
+        linear-gradient(
+            calc(100deg + (var(--my) - 0.5) * 50deg),
+            transparent calc(var(--mx) * 100% - 18%),
+            rgba(245, 240, 230, 0.55) calc(var(--mx) * 100%),
+            transparent calc(var(--mx) * 100% + 18%)
+        );
+    mix-blend-mode: screen;
+    opacity: var(--lit);
+    pointer-events: none;
+    transition: opacity var(--duration-glow) var(--ease-out-soft);
 }
 
 .hero__wordmark {
@@ -1034,11 +1089,24 @@ strong {
 
 /* ===================================================================== responsive */
 
-/* Desktop: the coin at twice its phone-era size, with its 0.25× clear space kept. */
+/* Desktop: the coin larger again, with its 0.25× clear space kept. */
 @media (min-width: 1024px) {
     .hero__coin {
-        width: clamp(140px, 20vh, 224px);
-        margin-bottom: clamp(30px, 4vh, 48px);
+        width: clamp(280px, 40vh, 448px);
+        margin-bottom: clamp(28px, 3.6vh, 48px);
+    }
+
+    /* Tighter rhythm so the larger coin, the title and the button all fit on the first screen. */
+    .hero {
+        padding-top: clamp(64px, 8vh, 120px);
+    }
+
+    .hero__wordmark {
+        font-size: clamp(3.4rem, min(15vw, 22vh), 12.5rem);
+    }
+
+    .hero__cta {
+        margin-top: clamp(28px, 4.5vh, 64px);
     }
 }
 

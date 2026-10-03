@@ -23,7 +23,18 @@
         </div>
 
         <div class="hero__inner">
-            <img class="hero__coin" src="{{ asset('images/brand/coin-512.webp') }}" alt="" width="512" height="512" data-glass-keepout>
+            {{-- The coin tilts under the cursor as if pressed, and its gold catches the light where you touch it. --}}
+            <span class="hero__coin coin" data-coin data-glass-keepout>
+                <img
+                    src="{{ asset('images/brand/coin-512.webp') }}"
+                    srcset="{{ asset('images/brand/coin-512.webp') }} 512w, {{ asset('images/brand/coin-1024.webp') }} 1024w"
+                    sizes="(min-width: 1024px) 448px, 280px"
+                    alt=""
+                    width="512"
+                    height="512"
+                >
+                <span class="coin__sheen" aria-hidden="true"></span>
+            </span>
             <h1 class="hero__wordmark" data-glass-keepout>{{ $name }}</h1>
             <p class="hero__tagline" data-glass-keepout>{{ $tagline }}</p>
 
