@@ -1,0 +1,1104 @@
+/* The Mosaic FX design system tokens, copied verbatim from the design system (tokens/*.css).
+   Edit them there first; this site should never invent a colour, face, radius or shadow. */
+@import './tokens/fonts.css';
+@import './tokens/colors.css';
+@import './tokens/typography.css';
+@import './tokens/spacing.css';
+@import './tokens/effects.css';
+@import './tokens/motion.css';
+
+/* ===================================================================== site layer
+   The design system was drawn for social canvases; these are the few values a web page
+   needs on top of it. */
+
+:root {
+    color-scheme: dark;
+    --container: var(--content-max);
+    --gutter: clamp(16px, 4vw, 40px);
+    --section-space: clamp(88px, 11vw, 144px);
+}
+
+/* ===================================================================== base */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--surface-base);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+html.is-locked {
+    overflow: hidden;
+}
+
+/* Fraunces Italic for everything readable. */
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--surface-base);
+    color: var(--text-body);
+    font-family: var(--font-text);
+    font-size: var(--text-4);
+    font-style: italic;
+    font-weight: var(--text-weight);
+    line-height: var(--text-leading);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+}
+
+img,
+svg,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: var(--transition-interactive);
+}
+
+a:hover {
+    color: var(--link-color-hover);
+}
+
+button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p,
+figure,
+ul,
+ol {
+    margin: 0;
+}
+
+ul,
+ol {
+    padding: 0;
+    list-style: none;
+}
+
+strong {
+    font-weight: var(--text-weight-semi);
+}
+
+/* Focus is a gold border plus the hover glow. */
+:focus-visible {
+    outline: 1px solid var(--focus-ring);
+    outline-offset: 3px;
+    box-shadow: var(--glow-hover);
+}
+
+.container {
+    width: min(100% - 2 * var(--gutter), var(--container));
+    margin-inline: auto;
+}
+
+/* ===================================================================== type roles */
+
+/* Tracked uppercase mono — plate refs, labels, fine print. */
+.meta {
+    color: var(--text-meta);
+    font-family: var(--font-mono);
+    font-size: var(--meta);
+    font-style: normal;
+    font-weight: var(--mono-weight);
+    letter-spacing: var(--meta-tracking);
+    text-transform: uppercase;
+}
+
+/* Display hooks — Clash Display, all caps, one per plate. */
+.hook {
+    color: var(--text-display);
+    font-family: var(--font-display);
+    font-size: clamp(2.3rem, 5vw, var(--display-1));
+    font-style: normal;
+    font-weight: var(--display-weight);
+    line-height: var(--display-leading-2);
+    letter-spacing: var(--display-tracking);
+    text-transform: uppercase;
+    text-wrap: balance;
+}
+
+.lead {
+    margin-top: var(--space-8);
+    color: var(--text-body);
+    font-size: clamp(var(--text-4), 1.9vw, var(--text-3));
+    line-height: var(--text-leading);
+    text-wrap: pretty;
+}
+
+.body {
+    max-width: 52ch;
+    margin-top: var(--space-6);
+    color: var(--text-meta);
+    font-size: var(--text-5);
+    line-height: var(--text-leading-loose);
+    text-wrap: pretty;
+}
+
+.caption {
+    color: var(--text-meta);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
+}
+
+.badge {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    border: var(--border-hair);
+    background: var(--surface-glass-tint);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    color: var(--text-meta);
+    font-family: var(--font-mono);
+    font-size: var(--meta-xs);
+    font-style: normal;
+    letter-spacing: var(--meta-tracking-tight);
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+/* ===================================================================== plate furniture */
+
+/* The tracked mono rule that opens and closes a web plate. */
+.plate-rule {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4) var(--space-9);
+    padding-block: var(--space-6);
+    border-bottom: var(--border-plate);
+    color: var(--text-meta);
+    font-family: var(--font-mono);
+    font-size: var(--meta-small);
+    font-style: normal;
+    letter-spacing: var(--meta-tracking);
+    text-transform: uppercase;
+}
+
+/* Section header: plate ref in mono, italic section title in gold, under a gold rule. */
+.plate-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-3) var(--space-7);
+    padding-top: var(--space-6);
+    border-top: var(--border-plate);
+}
+
+.plate-header__plate {
+    color: var(--text-meta);
+    font-family: var(--font-mono);
+    font-size: var(--meta);
+    font-style: normal;
+    letter-spacing: var(--meta-tracking);
+    text-transform: uppercase;
+}
+
+.plate-header__title {
+    color: var(--text-accent);
+    font-size: clamp(var(--text-2), 3vw, var(--text-1));
+    font-weight: var(--text-weight-semi);
+    line-height: 1.1;
+}
+
+/* Editorial Plate grid: cells divided by a 1px gold seam (the grid gap showing through). */
+.plate-grid {
+    display: grid;
+    gap: var(--space-hair);
+    border: var(--border-hair);
+    background: var(--surface-seam);
+}
+
+.plate-cell {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    min-width: 0;
+    padding: var(--pad-cell);
+    background: var(--surface-cell);
+}
+
+.plate-cell__head {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-5);
+    color: var(--text-meta);
+    font-family: var(--font-mono);
+    font-size: var(--meta-small);
+    font-style: normal;
+    letter-spacing: var(--meta-tracking);
+    text-transform: uppercase;
+}
+
+/* Stained-Glass Panel card: frosted 8% white over the leaded texture, one gold hairline. */
+.glass-card {
+    padding: var(--pad-card);
+    border: var(--border-glass);
+    border-radius: var(--radius-none);
+    background: var(--glass-fill);
+    -webkit-backdrop-filter: var(--glass-blur-heavy);
+    backdrop-filter: var(--glass-blur-heavy);
+    box-shadow: var(--glass-shadow);
+}
+
+/* The leaded texture always sits behind the content of its section. */
+.mosaic-texture {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Where the animated glass runs, its canvas replaces the static texture. */
+.glass-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+.has-glass > .mosaic-texture {
+    display: none;
+}
+
+/* ===================================================================== buttons */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    border: 1px solid transparent;
+    border-radius: var(--radius-none);
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-weight: var(--mono-weight-mid);
+    letter-spacing: var(--meta-tracking-tight);
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+        var(--transition-interactive),
+        transform var(--duration-fast) var(--ease-standard);
+}
+
+/* Hover warms Champagne Gold to Bright Gold and lights the glow; press is 0.985 and nothing else. */
+.btn--primary {
+    border-color: var(--action-fill);
+    background: var(--action-fill);
+    color: var(--action-text);
+}
+
+.btn--primary:hover {
+    border-color: var(--action-fill-hover);
+    background: var(--action-fill-hover);
+    color: var(--action-text);
+    box-shadow: var(--glow-hover);
+}
+
+.btn:active {
+    transform: scale(var(--press-scale));
+}
+
+.btn:focus-visible {
+    outline: none;
+    border-color: var(--focus-ring);
+    box-shadow: var(--glow-hover);
+}
+
+.btn--lg {
+    padding: var(--space-5) var(--space-8);
+    font-size: var(--meta);
+}
+
+.btn--xl {
+    padding: var(--space-7) var(--space-10);
+    font-size: var(--mono-2);
+}
+
+.btn__icon {
+    width: 16px;
+    height: 16px;
+    flex: none;
+}
+
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex: none;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-none);
+    color: var(--text-accent);
+    transition: var(--transition-interactive);
+}
+
+.icon-btn:hover {
+    border-color: var(--text-emphasis);
+    color: var(--text-emphasis);
+    box-shadow: var(--glow-hover);
+}
+
+.icon-btn--ghost {
+    border-color: transparent;
+    color: var(--text-meta);
+}
+
+.icon-btn--ghost:hover {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.icon-btn[hidden] {
+    display: none;
+}
+
+.icon-btn .icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===================================================================== plate 01 — cover */
+
+.hero {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: clamp(96px, 13vh, 150px) var(--gutter) clamp(170px, 26vh, 280px);
+    overflow: hidden;
+    background: var(--surface-base);
+    text-align: center;
+}
+
+/* Without WebGL the static texture stands in, fading up out of the dark the same way. */
+.hero__texture {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 48%, black 88%);
+    mask-image: linear-gradient(to bottom, transparent 48%, black 88%);
+}
+
+.hero__rule {
+    position: absolute;
+    inset: 0 0 auto;
+    width: min(100% - 2 * var(--gutter), var(--container));
+    margin-inline: auto;
+}
+
+.hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: calc(1 - var(--hero-progress, 0) * 1.5);
+}
+
+/* The coin: the brand's only illustration, with 0.25× clear space beneath it. */
+.hero__coin {
+    width: clamp(95px, 12.5vh, 140px);
+    height: auto;
+    aspect-ratio: 1;
+    margin-bottom: clamp(24px, 3.2vh, 36px);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--glow-coin);
+}
+
+.hero__wordmark {
+    width: fit-content;
+    color: var(--text-display);
+    /* The wordmark in the title serif: Fraunces, always italic. */
+    padding-inline: 0.06em 0.12em;
+    font-family: var(--font-text);
+    font-size: clamp(3.4rem, 15vw, 12.5rem);
+    font-style: italic;
+    font-weight: var(--text-weight-semi);
+    line-height: 0.95;
+    letter-spacing: var(--display-tracking);
+    text-shadow: var(--text-shadow-hook), var(--glow-mark);
+    white-space: nowrap;
+}
+
+/* The locked tagline sits beneath the wordmark, never reworded. */
+.hero__tagline {
+    width: fit-content;
+    margin-top: clamp(14px, 2vh, 22px);
+    color: var(--text-body);
+    font-size: clamp(var(--text-4), 2.2vw, var(--text-2));
+    font-weight: var(--text-weight-semi);
+    line-height: var(--text-leading-tight);
+    text-shadow: var(--text-shadow-meta);
+}
+
+.hero__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-6);
+    width: fit-content;
+    margin-top: clamp(36px, 7vh, 80px);
+}
+
+/* First load: a backlight coming up — calm fades, nothing slides in. */
+.js .hero__coin,
+.js .hero__wordmark,
+.js .hero__tagline,
+.js .hero__cta,
+.js .hero__rule {
+    animation: fade-in var(--duration-glow) var(--ease-standard) both;
+}
+
+.js .hero__coin {
+    animation-delay: 100ms;
+}
+
+.js .hero__wordmark {
+    animation-delay: 220ms;
+}
+
+.js .hero__tagline {
+    animation-delay: 440ms;
+}
+
+.js .hero__cta {
+    animation-delay: 640ms;
+}
+
+.js .hero__rule {
+    animation-delay: 840ms;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+/* ===================================================================== sections */
+
+.section {
+    position: relative;
+    isolation: isolate;
+    padding-block: var(--section-space);
+}
+
+.js [data-reveal] {
+    opacity: 0;
+    transition: opacity var(--duration-glow) var(--ease-standard) var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal].is-in {
+    opacity: 1;
+}
+
+/* ===================================================================== plate 02 — who we are */
+
+.story__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: clamp(40px, 6vw, var(--space-13));
+    align-items: center;
+    margin-top: var(--gap-section);
+}
+
+.values {
+    margin-top: var(--space-11);
+    border-top: var(--border-hair);
+}
+
+.value {
+    display: grid;
+    grid-template-columns: var(--space-11) minmax(0, 1fr);
+    gap: var(--space-6);
+    padding-block: var(--space-7);
+    border-bottom: var(--border-hair);
+}
+
+.value__num {
+    padding-top: var(--space-1);
+    color: var(--text-accent);
+    font-family: var(--font-mono);
+    font-size: var(--mono-2);
+    font-style: normal;
+    letter-spacing: var(--mono-tracking);
+}
+
+.value__title {
+    color: var(--text-body);
+    font-size: var(--text-4);
+    font-weight: var(--text-weight-semi);
+    line-height: var(--text-leading-tight);
+}
+
+.value p {
+    margin-top: var(--space-2);
+    color: var(--text-meta);
+    font-size: var(--text-5);
+    line-height: var(--text-leading);
+}
+
+/* Member proof as a Stained-Glass Panel: frosted frames over the leaded texture. */
+.proof {
+    position: relative;
+    isolation: isolate;
+    padding: clamp(18px, 3vw, var(--pad-plate));
+    overflow: hidden;
+    border: var(--border-hair);
+}
+
+.proof__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    margin-bottom: var(--space-8);
+}
+
+.proof__head .meta {
+    color: var(--bright-gold);
+    text-shadow: var(--text-shadow-meta);
+}
+
+.proof__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-7);
+}
+
+.proof__slot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    min-width: 0;
+}
+
+.proof__frame {
+    display: block;
+    width: 100%;
+    padding: var(--space-3);
+    border: var(--border-glass);
+    background: var(--glass-fill);
+    -webkit-backdrop-filter: var(--glass-blur-heavy);
+    backdrop-filter: var(--glass-blur-heavy);
+    box-shadow: var(--glass-shadow);
+    cursor: zoom-in;
+    transition:
+        var(--transition-interactive),
+        transform var(--duration-fast) var(--ease-standard);
+}
+
+.proof__frame:hover {
+    border-color: var(--text-emphasis);
+    box-shadow: var(--glass-shadow), var(--glow-hover);
+}
+
+.proof__frame:active {
+    transform: scale(var(--press-scale));
+}
+
+.proof__frame img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    background: var(--surface-base);
+    object-fit: cover;
+    object-position: top center;
+    transition: opacity var(--duration-glow) var(--ease-standard);
+}
+
+.proof__slot.is-changing img {
+    opacity: 0;
+}
+
+.proof__caption {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    color: var(--text-body);
+    font-family: var(--font-mono);
+    font-size: var(--meta-xs);
+    font-style: normal;
+    letter-spacing: var(--meta-tracking-tight);
+    text-shadow: var(--text-shadow-meta);
+    text-transform: uppercase;
+}
+
+.proof__line {
+    margin-top: var(--space-8);
+    color: var(--text-body);
+    font-size: var(--text-5);
+    text-shadow: var(--text-shadow-meta);
+}
+
+/* ===================================================================== plate 03 — how we teach */
+
+/* Faint texture (0.15) behind the dense grid, feathered so it never reads as a coloured band. */
+.teach__texture {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 28%, black 70%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 28%, black 70%, transparent);
+}
+
+.teach__intro {
+    max-width: 760px;
+    margin-top: var(--gap-section);
+}
+
+.stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: var(--space-12);
+}
+
+.stat {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+    color: var(--text-accent);
+    font-family: var(--font-mono);
+    font-style: normal;
+}
+
+.stat__value {
+    font-size: clamp(2.3rem, 4vw, var(--mono-hero));
+    font-weight: var(--mono-weight-bold);
+    line-height: 1;
+    letter-spacing: var(--mono-tracking);
+}
+
+.stat__unit {
+    font-size: var(--mono-2);
+    letter-spacing: var(--meta-tracking-tight);
+    text-transform: uppercase;
+}
+
+/* The steps sit on the same plate as the numbers: their borders overlap into one seam. */
+.steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: -1px;
+}
+
+.step__title {
+    margin-top: var(--space-9);
+    color: var(--text-body);
+    font-size: var(--text-3);
+    font-weight: var(--text-weight-semi);
+    line-height: var(--text-leading-tight);
+    text-wrap: balance;
+}
+
+.steps .plate-cell p {
+    color: var(--text-meta);
+    font-size: var(--text-5);
+    line-height: var(--text-leading-loose);
+}
+
+/* ===================================================================== plate 04 — closing frame */
+
+.join {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    min-height: clamp(640px, 92svh, 920px);
+    padding: var(--section-space) var(--gutter);
+    overflow: hidden;
+    background: var(--surface-base);
+    text-align: center;
+}
+
+.join__texture {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%, black 72%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 30%, black 72%, transparent);
+}
+
+.join__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(100%, 640px);
+    padding: clamp(32px, 5vw, var(--pad-plate));
+}
+
+.join__coin {
+    width: 96px;
+    height: 96px;
+    margin-bottom: var(--space-8);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--glow-coin);
+}
+
+.join__wordmark {
+    color: var(--text-display);
+    font-family: var(--font-text);
+    font-size: clamp(2.8rem, 7vw, 4.25rem);
+    font-style: italic;
+    font-weight: var(--text-weight-semi);
+    line-height: 1;
+    letter-spacing: var(--display-tracking);
+    text-shadow: var(--text-shadow-hook);
+}
+
+.join__tagline {
+    margin-top: var(--space-4);
+    color: var(--text-body);
+    font-size: var(--text-4);
+    font-weight: var(--text-weight-semi);
+}
+
+.join__title {
+    width: 100%;
+    margin-top: var(--space-10);
+    padding-top: var(--space-10);
+    border-top: var(--border-hair);
+    color: var(--text-accent);
+    font-size: clamp(var(--text-2), 3vw, var(--text-1));
+    font-weight: var(--text-weight-semi);
+    line-height: 1.15;
+    text-wrap: balance;
+}
+
+.join__body {
+    max-width: 46ch;
+    margin-top: var(--space-6);
+    color: var(--text-body);
+    font-size: var(--text-5);
+    line-height: var(--text-leading-loose);
+}
+
+.join .btn {
+    margin-top: var(--space-10);
+}
+
+.join .meta {
+    margin-top: var(--space-6);
+}
+
+/* ===================================================================== footer */
+
+.footer {
+    padding-bottom: var(--space-11);
+    background: var(--surface-base);
+}
+
+.footer__rule {
+    border-top: var(--border-plate);
+    border-bottom: 0;
+}
+
+.footer__tagline {
+    color: var(--text-body);
+    font-family: var(--font-text);
+    font-size: var(--text-5);
+    font-style: italic;
+    font-weight: var(--text-weight-semi);
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.footer__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-9);
+    padding-block: var(--space-10);
+    border-top: var(--border-hair);
+}
+
+.footer__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-5);
+    color: var(--text-display);
+}
+
+.footer__brand img {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--glow-coin);
+}
+
+.footer__wordmark {
+    font-family: var(--font-text);
+    font-size: var(--text-2);
+    font-style: italic;
+    font-weight: var(--text-weight-semi);
+    line-height: 1;
+    letter-spacing: var(--display-tracking-2);
+}
+
+.footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-9);
+    font-family: var(--font-mono);
+    font-size: var(--meta-small);
+    font-style: normal;
+    letter-spacing: var(--meta-tracking);
+    text-transform: uppercase;
+}
+
+.footer__legal {
+    display: grid;
+    gap: var(--space-5);
+    padding-top: var(--space-9);
+    border-top: var(--border-hair);
+    color: var(--text-meta);
+    font-size: var(--text-small);
+    line-height: var(--text-leading-loose);
+}
+
+.footer__legal strong,
+.footer__line {
+    color: var(--text-body);
+}
+
+.footer__line {
+    font-weight: var(--text-weight-semi);
+}
+
+/* ===================================================================== lightbox — a modal plate */
+
+.lightbox {
+    width: 100vw;
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: var(--space-9);
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+    color: var(--text-body);
+}
+
+.lightbox[open] {
+    display: grid;
+    place-items: center;
+    animation: fade-in var(--duration-slow) var(--ease-standard);
+}
+
+.lightbox::backdrop {
+    background: var(--surface-glass-tint);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+}
+
+.lightbox__plate {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-7);
+    width: min(560px, 100%);
+    max-height: 100%;
+    padding: var(--pad-card);
+    border: 1px solid var(--border-strong);
+    background: var(--surface-base);
+    box-shadow: var(--glow-plate);
+}
+
+.lightbox__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-5);
+    padding-bottom: var(--space-5);
+    border-bottom: var(--border-plate);
+}
+
+.lightbox__heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: left;
+}
+
+.lightbox__title {
+    color: var(--text-accent);
+    font-size: var(--text-3);
+    font-weight: var(--text-weight-semi);
+    line-height: 1.15;
+}
+
+.lightbox__stage {
+    display: grid;
+    place-items: center;
+    min-height: 0;
+}
+
+.lightbox__stage img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: calc(100dvh - 280px);
+    border: var(--border-hair);
+}
+
+.lightbox__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+}
+
+.lightbox__note {
+    color: var(--text-meta);
+    font-size: var(--text-small);
+    text-align: center;
+}
+
+/* ===================================================================== toast — a blurred indigo notice */
+
+.toast {
+    position: fixed;
+    bottom: max(24px, env(safe-area-inset-bottom));
+    left: 50%;
+    z-index: 50;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-5);
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    padding: 13px 16px;
+    border: var(--border-hair);
+    border-left: 2px solid var(--champagne-gold);
+    background: var(--surface-glass-tint);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    opacity: 0;
+    translate: -50% 0;
+    pointer-events: none;
+    transition: opacity var(--duration-slow) var(--ease-standard);
+}
+
+.toast.is-shown {
+    opacity: 1;
+}
+
+.toast__icon {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    margin-top: var(--space-1);
+    color: var(--champagne-gold);
+}
+
+.toast__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    text-align: left;
+}
+
+.toast__message {
+    color: var(--text-body);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
+}
+
+.toast__meta {
+    color: var(--text-meta);
+    font-family: var(--font-mono);
+    font-size: var(--meta-xs);
+    font-style: normal;
+    letter-spacing: var(--meta-tracking-tight);
+    text-transform: uppercase;
+}
+
+/* ===================================================================== responsive */
+
+/* Desktop: the coin at twice its phone-era size, with its 0.25× clear space kept. */
+@media (min-width: 1024px) {
+    .hero__coin {
+        width: clamp(140px, 20vh, 224px);
+        margin-bottom: clamp(30px, 4vh, 48px);
+    }
+}
+
+@media (max-width: 1023px) {
+    .story__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .stats,
+    .steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 639px) {
+    .hero__rule .meta-extra {
+        display: none;
+    }
+
+    .steps {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .plate-cell__fig {
+        display: none;
+    }
+
+    .proof__grid {
+        gap: var(--space-5);
+    }
+
+    .btn--xl {
+        padding: var(--space-6) var(--space-8);
+        font-size: var(--meta);
+    }
+
+    .lightbox {
+        padding: var(--space-5);
+    }
+}
+
+/* ?still — a settled, motionless page for screenshots */
+.is-still *,
+.is-still *::before,
+.is-still *::after {
+    animation: none !important;
+    transition: none !important;
+}
+
+.is-still [data-reveal] {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .js [data-reveal] {
+        opacity: 1;
+        transition: none;
+    }
+}

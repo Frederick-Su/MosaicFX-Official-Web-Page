@@ -1,0 +1,37 @@
+/* Mosaic FX — spacing. The plate is built from 1px gold seams, generous
+   section gaps and percentage canvas margins. */
+
+:root {
+  --space-hair: 1px;   /* the seam between editorial cells — the signature gap */
+  --space-1: 2px;
+  --space-2: 5px;
+  --space-3: 6px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 14px;
+  --space-7: 18px;
+  --space-8: 22px;
+  --space-9: 24px;
+  --space-10: 32px;
+  --space-11: 44px;
+  --space-12: 52px;
+  --space-13: 86px;
+
+  /* Section rhythm on a plate */
+  --gap-inline: 12px;
+  --gap-stack: 22px;
+  --gap-section: 44px;
+  --gap-plate: 86px;
+
+  /* Cell / card padding */
+  --pad-cell: 22px;
+  --pad-card: 24px;
+  --pad-plate: 52px;
+
+  /* Canvas rules — social assets */
+  --canvas-margin: 7%;      /* clear on all four edges */
+  --canvas-safe-bottom: 14%; /* keep anything critical above this on stories */
+  --canvas-zone: 33.333%;    /* hook / proof / ask */
+
+  --content-max: 1160px;
+}

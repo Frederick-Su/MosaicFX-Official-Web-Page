@@ -1,0 +1,77 @@
+/* Mosaic FX — colour law. Ten locked swatches, nothing else.
+   Max 3 accent colours per design; Void Indigo is the given base and doesn't count. */
+
+:root {
+  /* ── Base values ───────────────────────────────────────────── */
+  --void-indigo: #1B1030;      /* base / background, always */
+  --void-indigo-raised: #2A1550; /* a deeper pane tone, used inside the glass */
+  --void-indigo-ink: #2A1D42;   /* body ink on the light ground */
+  --champagne-gold: #D8B15C;    /* headlines, borders, leading, CTA */
+  --bright-gold: #F2C879;       /* glow, gradients, hover / emissive edges */
+  --mosaic-violet: #5B2E91;     /* stained-glass texture ONLY */
+  --mosaic-violet-deep: #42207A;/* stained-glass texture ONLY */
+  --mosaic-blue: #3A4FD0;       /* stained-glass texture ONLY */
+  --mosaic-magenta: #D6237F;    /* stained-glass texture ONLY */
+  --mosaic-magenta-deep: #8A2A6A;/* stained-glass texture ONLY */
+  --win-green: #2FD98A;         /* wins and TP hits ONLY */
+  --loss-red: #FF5C77;          /* losses and SL hits ONLY */
+  --off-white: #F5F0E6;         /* body text on dark; the light ground */
+  --lavender-grey: #9C93B0;     /* captions, secondary and meta text on dark */
+  --lavender-grey-ink: #5A4F72; /* meta text on the light ground */
+
+  /* ── Semantic aliases — dark ground (the default) ─────────── */
+  --surface-base: var(--void-indigo);
+  --surface-card: rgba(245, 240, 230, 0.08);   /* the frosted glass card */
+  --surface-cell: var(--void-indigo);           /* editorial-plate grid cell */
+  --surface-seam: rgba(216, 177, 92, 0.28);     /* 1px gold seam between cells */
+  --surface-glass-tint: rgba(27, 16, 48, 0.72); /* readability capsule over glass */
+
+  --text-display: var(--champagne-gold);
+  --text-body: var(--off-white);
+  --text-meta: var(--lavender-grey);
+  --text-accent: var(--champagne-gold);
+  --text-emphasis: var(--bright-gold);
+  --text-on-gold: var(--void-indigo);
+
+  --border-hairline: rgba(216, 177, 92, 0.28);
+  --border-rule: rgba(216, 177, 92, 0.34);
+  --border-card: rgba(216, 177, 92, 0.55);
+  --border-strong: var(--champagne-gold);
+  --border-neutral: rgba(245, 240, 230, 0.20);
+
+  --signal-win: var(--win-green);
+  --signal-loss: var(--loss-red);
+
+  --action-fill: var(--champagne-gold);
+  --action-fill-hover: var(--bright-gold);
+  --action-text: var(--void-indigo);
+  --focus-ring: var(--bright-gold);
+
+  --link-color: var(--champagne-gold);
+  --link-color-hover: var(--bright-gold);
+}
+
+/* ── Explicit light variant. Opt in per-asset only: dark is the brand. ─── */
+[data-ground="light"] {
+  --surface-base: var(--off-white);
+  --surface-card: rgba(27, 16, 48, 0.04);
+  --surface-cell: var(--off-white);
+  --surface-seam: rgba(27, 16, 48, 0.18);
+
+  --text-display: var(--void-indigo);
+  --text-body: var(--void-indigo-ink);
+  --text-meta: var(--lavender-grey-ink);
+  --text-accent: var(--void-indigo);
+  --text-emphasis: var(--void-indigo);
+
+  --border-hairline: rgba(27, 16, 48, 0.18);
+  --border-rule: rgba(27, 16, 48, 0.26);
+  --border-card: rgba(216, 177, 92, 0.75);
+  --border-neutral: rgba(27, 16, 48, 0.16);
+
+  --action-fill: var(--void-indigo);
+  --action-text: var(--off-white);
+
+  --link-color: var(--void-indigo);
+  --link-color-hover: var(--mosaic-violet);
+}

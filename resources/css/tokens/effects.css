@@ -1,0 +1,44 @@
+/* Mosaic FX — borders, radii, glass and glow.
+   The brand is leaded glass: hairlines, not shadows. Corners stay square
+   except the coin, which is the only circle. */
+
+:root {
+  /* Radii — the plate is square-cornered by law */
+  --radius-none: 0;
+  --radius-swatch: 3px;    /* colour chips only */
+  --radius-pill: 999px;    /* the coin / avatar crop only */
+
+  /* Borders */
+  --border-width: 1px;
+  --border-hair: 1px solid var(--border-hairline);
+  --border-plate: 1px solid var(--border-rule);
+  --border-glass: 1px solid var(--border-card);
+  --leading-width: 2.2px;  /* gold leading on a glass seam */
+
+  /* Frosted glass card — Stained-Glass Panel style */
+  --glass-fill: rgba(245, 240, 230, 0.08);
+  --glass-blur: blur(18px); /* @kind other */
+  --glass-blur-heavy: blur(26px); /* @kind other */
+  --glass-shadow: 0 10px 40px rgba(27, 16, 48, 0.5);
+
+  /* Gold glow — the backlight, never a drop shadow */
+  --glow-coin: 0 0 34px rgba(242, 200, 121, 0.26);
+  --glow-mark: 0 0 70px rgba(242, 200, 121, 0.18);
+  --glow-plate: 0 0 60px rgba(242, 200, 121, 0.16), inset 0 0 90px rgba(242, 200, 121, 0.06);
+  --glow-hover: 0 0 22px rgba(242, 200, 121, 0.34);
+
+  /* Protection — text over glass */
+  --text-shadow-hook: 0 2px 14px rgba(27, 16, 48, 0.85);
+  --text-shadow-meta: 0 1px 8px rgba(27, 16, 48, 0.9);
+
+  /* Texture presence — opacity of the leaded tessellation behind content */
+  --texture-faint: 0.15; /* @kind other */
+  --texture-quiet: 0.35; /* @kind other */
+  --texture-default: 0.5; /* @kind other */
+  --texture-hero: 0.85; /* @kind other */
+
+  /* Selection */
+  --selection-bg: rgba(216, 177, 92, 0.3);
+}
+
+::selection { background: var(--selection-bg); color: var(--off-white); }

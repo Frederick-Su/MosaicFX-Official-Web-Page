@@ -1,0 +1,55 @@
+/* Mosaic FX — type scale, lifted from the brand reference plate.
+   Clash Display for the big word. Fraunces Italic for everything readable.
+   IBM Plex Mono for numerals and tracked meta labels. */
+
+:root {
+  /* Display — Clash Display, 600/700, never body copy */
+  --display-hero: 96px;
+  --display-1: 58px;
+  --display-2: 40px;
+  --display-3: 31px;
+  --display-4: 26px;
+  --display-5: 22px;
+  --display-weight: 700;
+  --display-weight-soft: 600;
+  --display-leading: 0.86;
+  --display-leading-2: 0.94;
+  --display-tracking: -0.02em;
+  --display-tracking-2: -0.005em;
+
+  /* Text — Fraunces, always italic */
+  --text-hero: 40px;
+  --text-1: 32px;
+  --text-2: 25px;
+  --text-3: 22px;
+  --text-4: 18px;
+  --text-5: 16px;
+  --text-body-size: 15px;
+  --text-small: 13.5px;
+  --text-xs: 12.5px;
+  --text-weight: 400;
+  --text-weight-semi: 600;
+  --text-leading-tight: 1.25;
+  --text-leading: 1.5;
+  --text-leading-loose: 1.6;
+  --text-style: italic;
+
+  /* Numerals & meta — IBM Plex Mono */
+  --mono-hero: 52px;
+  --mono-1: 19px;
+  --mono-2: 13px;
+  --mono-3: 11.5px;
+  --meta: 11px;
+  --meta-small: 10px;
+  --meta-xs: 9.5px;
+  --mono-weight: 400;
+  --mono-weight-mid: 500;
+  --mono-weight-bold: 600;
+  --meta-tracking: 0.2em;
+  --meta-tracking-tight: 0.18em;
+  --mono-tracking: 0.04em;
+
+  /* Measure */
+  --measure-body: 70ch;
+  --measure-narrow: 44ch;
+}

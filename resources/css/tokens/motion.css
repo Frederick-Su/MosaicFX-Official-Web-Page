@@ -1,0 +1,22 @@
+/* Mosaic FX — motion. Glass doesn't bounce. Everything is a calm fade or a
+   light warming; nothing overshoots, nothing springs. */
+
+:root {
+  --ease-standard: cubic-bezier(0.2, 0, 0.2, 1); /* @kind other */
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --duration-fast: 120ms; /* @kind other */
+  --duration-base: 180ms; /* @kind other */
+  --duration-slow: 320ms; /* @kind other */
+  --duration-glow: 600ms; /* @kind other */   /* backlight warming up */
+
+  --transition-interactive: color var(--duration-base) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-glow) var(--ease-out-soft);
+
+  --press-scale: 0.985; /* @kind other */  /* the only transform the brand allows */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --duration-fast: 0ms; /* @kind other */ --duration-base: 0ms; /* @kind other */ --duration-slow: 0ms; /* @kind other */ --duration-glow: 0ms; /* @kind other */ }
+}
