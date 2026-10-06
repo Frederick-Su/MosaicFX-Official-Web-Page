@@ -12,7 +12,7 @@
     $showSetup = filled($setup) || app()->isLocal();
 @endphp
 
-@section('title', $name.' — '.$tagline)
+@section('title', $name.' — Learn forex from zero, with free setups in Telegram')
 @section('description', 'MosaicFX teaches forex from zero: our own backtested strategies, hands-on MetaTrader 5, TradingView and Exness lessons, and free trade setups in our Telegram group.')
 
 @section('content')
@@ -41,12 +41,15 @@
                 >
                 <span class="coin__sheen" aria-hidden="true"></span>
             </span>
-            <h1 class="hero__wordmark" data-glass-keepout>{{ $name }}</h1>
+            {{-- The wordmark and locked tagline are the mark; the h1 says what MosaicFX actually offers. --}}
+            <p class="hero__wordmark" data-glass-keepout>{{ $name }}</p>
             <p class="hero__tagline" data-glass-keepout>{{ $tagline }}</p>
+            <h1 class="hero__offer" data-glass-keepout>Learn to trade forex from zero, with strategies we built and backtested ourselves.</h1>
 
             <div class="hero__cta" data-glass-keepout data-glass-floor>
                 <x-telegram-button size="xl" />
                 <p class="meta">Free to join <span aria-hidden="true">·</span> Learn at your own pace</p>
+                <p class="cta-risk">Trading carries a high risk of loss. Education, not financial advice.</p>
             </div>
         </div>
     </section>
@@ -139,7 +142,7 @@
                             <span class="value__num">03</span>
                             <div>
                                 <h3 class="value__title">Message us anytime.</h3>
-                                <p>Especially mid-trade. Reaching for your stop loss? Don't sit with it alone.</p>
+                                <p>Rattled by a trade? Message us. We'll help you think it through against your plan, but we won't tell you what to do with your money.</p>
                             </div>
                         </li>
                     </ol>
@@ -236,7 +239,7 @@
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Support</span><span class="plate-cell__fig">Fig. 4D</span></span>
                     <span class="stat"><span class="stat__value">Direct</span><span class="stat__unit">messages</span></span>
-                    <span class="caption">Message us anytime, especially mid-trade.</span>
+                    <span class="caption">Message us anytime. We help you think it through; the decision stays yours.</span>
                 </li>
             </ul>
 
@@ -257,9 +260,9 @@
                     <p>Start on demo. There's no pressure to touch real money until you feel ready, and if a trade rattles you, message us.</p>
                 </li>
                 <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Step 04</span><span>Your own calls</span></span>
-                    <h3 class="step__title">Make your own calls.</h3>
-                    <p>The goal is independence: reading setups yourself, not waiting on our calls forever. Trade the law, not the feeling.</p>
+                    <span class="plate-cell__head"><span>Step 04</span><span>Independence</span></span>
+                    <h3 class="step__title">Make your own decisions.</h3>
+                    <p>The goal is independence: reading setups yourself, not waiting on our setups forever. Trade the law, not the feeling.</p>
                 </li>
             </ol>
 
@@ -307,6 +310,7 @@
             <p class="join__body">Join the free Telegram group. Read along, ask anything, and start when you're ready. No pressure, no countdowns.</p>
             <x-telegram-button size="xl" />
             <p class="meta">Free to join <span aria-hidden="true">·</span> Leave anytime</p>
+            <p class="cta-risk">Trading carries a high risk of loss. Education, not financial advice.</p>
         </div>
     </section>
 </main>

@@ -214,4 +214,18 @@ class HomePageTest extends TestCase
             ->assertSee('id="setups"', false)
             ->assertSee('No setup chart yet.');
     }
+
+    public function test_the_hero_says_what_mosaicfx_offers_and_every_button_carries_the_risk(): void
+    {
+        $content = $this->get('/')
+            ->assertOk()
+            ->assertSee('<h1 class="hero__offer"', false)
+            ->assertSee('Learn to trade forex from zero, with strategies we built and backtested ourselves.')
+            ->assertDontSee('Reaching for your stop loss')
+            ->getContent();
+
+        $this->assertSame(1, substr_count($content, '<h1'));
+        // Hero and closing frame each carry the one-line risk note beside the button.
+        $this->assertSame(2, substr_count($content, 'class="cta-risk"'));
+    }
 }

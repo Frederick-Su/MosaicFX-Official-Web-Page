@@ -518,6 +518,32 @@ strong {
     text-shadow: var(--text-shadow-meta);
 }
 
+/* The plain-words offer under the mark: upright, calm, and short enough to read in one glance. */
+.hero__offer {
+    max-width: 30ch;
+    margin-top: clamp(16px, 2.4vh, 28px);
+    color: var(--text-body);
+    font-size: clamp(var(--text-4), 1.9vw, var(--text-3));
+    font-weight: var(--text-weight);
+    line-height: var(--text-leading-tight);
+    text-shadow: var(--text-shadow-meta);
+    text-wrap: balance;
+}
+
+/* The risk said beside every Telegram button, never only in the footer. */
+.cta-risk {
+    max-width: 64ch;
+    text-wrap: balance;
+    color: var(--text-meta);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
+    text-shadow: var(--text-shadow-meta);
+}
+
+.join .cta-risk {
+    margin-top: var(--space-4);
+}
+
 .hero__cta {
     display: flex;
     flex-direction: column;
@@ -531,6 +557,7 @@ strong {
 .js .hero__coin,
 .js .hero__wordmark,
 .js .hero__tagline,
+.js .hero__offer,
 .js .hero__cta,
 .js .hero__rule {
     animation: fade-in var(--duration-glow) var(--ease-standard) both;
@@ -546,6 +573,10 @@ strong {
 
 .js .hero__tagline {
     animation-delay: 440ms;
+}
+
+.js .hero__offer {
+    animation-delay: 0.54s;
 }
 
 .js .hero__cta {
@@ -1418,20 +1449,21 @@ strong {
 @media (min-width: 1024px) {
     .hero__coin {
         width: clamp(280px, 40vh, 448px);
-        margin-bottom: clamp(28px, 3.6vh, 48px);
+        margin-bottom: clamp(20px, 2.4vh, 40px);
     }
 
-    /* Tighter rhythm so the larger coin, the title and the button all fit on the first screen. */
+    /* Tighter rhythm so the larger coin, the mark, the offer and the button all fit on the first
+       screen. The coin keeps its size; the wordmark and the gaps give way instead. */
     .hero {
-        padding-top: clamp(64px, 8vh, 120px);
+        padding-top: clamp(40px, 5vh, 120px);
     }
 
     .hero__wordmark {
-        font-size: clamp(3.4rem, min(15vw, 22vh), 12.5rem);
+        font-size: clamp(3.4rem, min(15vw, 18vh), 12.5rem);
     }
 
     .hero__cta {
-        margin-top: clamp(28px, 4.5vh, 64px);
+        margin-top: clamp(20px, 3vh, 64px);
     }
 }
 

@@ -16,4 +16,5 @@
 >
     <span>{{ $label }}</span>
     <x-icon name="send" class="btn__icon" />
+    @if ($url)<span class="sr-only">(opens Telegram in a new tab)</span>@endif
 </a>
