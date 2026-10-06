@@ -497,7 +497,7 @@ strong {
     width: fit-content;
     margin-top: clamp(14px, 2vh, 22px);
     color: var(--text-body);
-    font-size: clamp(var(--text-4), 2.2vw, var(--text-2));
+    font-size: var(--text-4);
     font-weight: var(--text-weight-semi);
     line-height: var(--text-leading-tight);
     text-shadow: var(--text-shadow-meta);
@@ -505,11 +505,11 @@ strong {
 
 /* The plain-words offer under the mark: upright, calm, and short enough to read in one glance. */
 .hero__offer {
-    max-width: 30ch;
+    max-width: 26ch;
     margin-top: clamp(16px, 2.4vh, 28px);
     color: var(--text-body);
-    font-size: clamp(var(--text-4), 1.9vw, var(--text-3));
-    font-weight: var(--text-weight);
+    font-size: clamp(21px, 2.3vw, 30px);
+    font-weight: var(--text-weight-semi);
     line-height: var(--text-leading-tight);
     text-shadow: var(--text-shadow-meta);
     text-wrap: balance;
@@ -527,6 +527,13 @@ strong {
 
 .join .cta-risk {
     margin-top: var(--space-4);
+}
+
+/* The closing card sits over the lightest stretch of glass; its small print takes the body colour
+   so it holds 4.5:1 there (lavender measured 2.7:1). */
+.join .cta-risk,
+.join .meta {
+    color: var(--text-body);
 }
 
 .hero__cta {
@@ -837,6 +844,9 @@ strong {
     align-items: flex-start;
     width: min(100%, 440px);
     padding: clamp(24px, 3vw, 36px);
+    /* A deeper tint than the default glass, so the gold title, dates and link clear contrast over
+       the brightest panes behind them. */
+    background: var(--surface-glass-tint);
 }
 
 .proof__line + .record {
@@ -958,7 +968,9 @@ strong {
 }
 
 .step__link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     margin-top: var(--space-3);
     color: var(--link-color);
     text-decoration: underline;
@@ -1206,6 +1218,8 @@ strong {
 .footer__nav a {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    min-width: 44px;
     min-height: 44px;
 }
 

@@ -94,7 +94,7 @@
             <ul class="setup__points" data-reveal data-reveal-delay="200">
                 <li class="setup__point">
                     <h3 class="setup__point-title">Marked on the chart.</h3>
-                    <p>Entry, stop and target, the way you'll see them on MetaTrader 5 or TradingView.</p>
+                    <p>The entry (where we get in), the stop (where we'd cut the loss) and the target (where we'd take profit), the way you'll see them on MetaTrader 5 or TradingView.</p>
                 </li>
                 <li class="setup__point">
                     <h3 class="setup__point-title">Losses posted too.</h3>
@@ -257,7 +257,7 @@
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Step 03</span><span>Practice</span></span>
                     <h3 class="step__title">Practice with someone in your corner.</h3>
-                    <p>Start on demo. There's no pressure to touch real money until you feel ready, and if a trade rattles you, message us.</p>
+                    <p>Start on a demo account, with practice money. There's no pressure to touch real money until you feel ready, and if a trade rattles you, message us.</p>
                 </li>
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Step 04</span><span>Independence</span></span>
@@ -284,7 +284,7 @@
                     <li class="academy__stage glass-card">
                         <span class="academy__stage-num">Stage 2</span>
                         <h4 class="academy__stage-title">MosaicFX strategies.</h4>
-                        <p>The professional strategies we built and backtested ourselves.</p>
+                        <p>The professional strategies we built ourselves and backtested, meaning tested against past market data.</p>
                     </li>
                     <li class="academy__stage glass-card">
                         <span class="academy__stage-num">Stage 3</span>
