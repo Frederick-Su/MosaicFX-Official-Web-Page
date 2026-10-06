@@ -156,12 +156,6 @@ strong {
     text-wrap: pretty;
 }
 
-.caption {
-    color: var(--text-meta);
-    font-size: var(--text-small);
-    line-height: var(--text-leading);
-}
-
 /* ===================================================================== plate furniture */
 
 /* The tracked mono rule that opens and closes a web plate. */
