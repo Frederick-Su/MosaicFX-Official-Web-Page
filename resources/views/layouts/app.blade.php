@@ -31,7 +31,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,600;1,9..144,700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600;1,9..144,700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
 
     <script>
         document.documentElement.classList.add('js');

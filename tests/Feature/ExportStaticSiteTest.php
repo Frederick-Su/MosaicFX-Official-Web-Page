@@ -29,7 +29,8 @@ class ExportStaticSiteTest extends TestCase
 
     public function test_it_writes_a_self_contained_static_site(): void
     {
-        config(['mosaic.telegram_url' => 'https://t.me/+example']);
+        // No setup chart, so the count below doesn't change when a real one is added to the folder.
+        config(['mosaic.telegram_url' => 'https://t.me/+example', 'mosaic.setup.path' => 'images/does-not-exist']);
 
         $this->artisan('site:export', ['--out' => $this->out, '--url' => 'https://mosaicfx.pages.dev'])
             ->assertSuccessful();
@@ -38,7 +39,7 @@ class ExportStaticSiteTest extends TestCase
 
         $this->assertStringContainsString('<link rel="canonical" href="https://mosaicfx.pages.dev">', $html);
         $this->assertStringContainsString('https://mosaicfx.pages.dev/build/assets/', $html);
-        $this->assertSame(2, substr_count($html, 'href="https://t.me/+example"'));
+        $this->assertSame(4, substr_count($html, 'href="https://t.me/+example"'));
         $this->assertFileExists($this->out.'/build/manifest.json');
         $this->assertFileExists($this->out.'/images/og.jpg');
         $this->assertFileDoesNotExist($this->out.'/index.php');

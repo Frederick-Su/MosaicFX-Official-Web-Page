@@ -20,6 +20,9 @@ export function initReveal() {
         { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
     );
 
+    // Hide only now that something is watching to bring the sections back (see .reveal-ready in app.css).
+    document.documentElement.classList.add('reveal-ready');
+
     items.forEach((el) => {
         if (el.dataset.revealDelay) el.style.setProperty('--reveal-delay', `${el.dataset.revealDelay}ms`);
         observer.observe(el);

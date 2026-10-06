@@ -15,7 +15,8 @@
     color-scheme: dark;
     --container: var(--content-max);
     --gutter: clamp(16px, 4vw, 40px);
-    --section-space: clamp(88px, 11vw, 144px);
+    /* Section breathing room: generous, but no longer a screen of empty dark between plates. */
+    --section-space: clamp(72px, 8vw, 112px);
 }
 
 /* ===================================================================== base */
@@ -37,7 +38,8 @@ html.is-locked {
     overflow: hidden;
 }
 
-/* Fraunces Italic for everything readable. */
+/* Fraunces, upright, for everything readable. Italic is the brand's voice and is kept for the
+   wordmark and the slogans (see --text-style-voice). */
 body {
     margin: 0;
     min-height: 100vh;
@@ -45,7 +47,7 @@ body {
     color: var(--text-body);
     font-family: var(--font-text);
     font-size: var(--text-4);
-    font-style: italic;
+    font-style: var(--text-style);
     font-weight: var(--text-weight);
     line-height: var(--text-leading);
     -webkit-font-smoothing: antialiased;
@@ -132,7 +134,7 @@ strong {
     font-style: normal;
     font-weight: var(--display-weight);
     line-height: var(--display-leading-2);
-    letter-spacing: var(--display-tracking);
+    letter-spacing: 0; /* negative tracking closed the word spaces in uppercase Clash */
     text-transform: uppercase;
     text-wrap: balance;
 }
@@ -154,28 +156,6 @@ strong {
     text-wrap: pretty;
 }
 
-.caption {
-    color: var(--text-meta);
-    font-size: var(--text-small);
-    line-height: var(--text-leading);
-}
-
-.badge {
-    display: inline-block;
-    padding: var(--space-2) var(--space-4);
-    border: var(--border-hair);
-    background: var(--surface-glass-tint);
-    -webkit-backdrop-filter: var(--glass-blur);
-    backdrop-filter: var(--glass-blur);
-    color: var(--text-meta);
-    font-family: var(--font-mono);
-    font-size: var(--meta-xs);
-    font-style: normal;
-    letter-spacing: var(--meta-tracking-tight);
-    line-height: 1.1;
-    text-transform: uppercase;
-}
-
 /* ===================================================================== plate furniture */
 
 /* The tracked mono rule that opens and closes a web plate. */
@@ -195,30 +175,11 @@ strong {
     text-transform: uppercase;
 }
 
-/* Section header: plate ref in mono, italic section title in gold, under a gold rule. */
-.plate-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: var(--space-3) var(--space-7);
-    padding-top: var(--space-6);
+/* Each section opens under a gold rule with two levels only: the headline (.hook, an h2) and
+   the lead paragraph beneath it. */
+.section > .container {
+    padding-top: var(--gap-section);
     border-top: var(--border-plate);
-}
-
-.plate-header__plate {
-    color: var(--text-meta);
-    font-family: var(--font-mono);
-    font-size: var(--meta);
-    font-style: normal;
-    letter-spacing: var(--meta-tracking);
-    text-transform: uppercase;
-}
-
-.plate-header__title {
-    color: var(--text-accent);
-    font-size: clamp(var(--text-2), 3vw, var(--text-1));
-    font-weight: var(--text-weight-semi);
-    line-height: 1.1;
 }
 
 /* Editorial Plate grid: cells divided by a 1px gold seam (the grid gap showing through). */
@@ -284,6 +245,18 @@ strong {
     display: none;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* ===================================================================== buttons */
 
 .btn {
@@ -317,6 +290,19 @@ strong {
     border-color: var(--action-fill-hover);
     background: var(--action-fill-hover);
     color: var(--action-text);
+    box-shadow: var(--glow-hover);
+}
+
+/* The secondary action: gold leading around clear glass, so it never competes with the one ask. */
+.btn--outline {
+    border-color: var(--border-strong);
+    background: transparent;
+    color: var(--text-accent);
+}
+
+.btn--outline:hover {
+    border-color: var(--action-fill-hover);
+    color: var(--text-emphasis);
     box-shadow: var(--glow-hover);
 }
 
@@ -421,7 +407,7 @@ strong {
 
 /* The coin: the brand's only illustration, with 0.25× clear space beneath it. */
 .hero__coin {
-    width: clamp(190px, 25vh, 280px);
+    width: clamp(150px, 20vh, 240px);
     margin-bottom: clamp(36px, 5vh, 56px);
 }
 
@@ -491,7 +477,7 @@ strong {
     padding-inline: 0.06em 0.12em;
     font-family: var(--font-text);
     font-size: clamp(3.4rem, 15vw, 12.5rem);
-    font-style: italic;
+    font-style: var(--text-style-voice);
     font-weight: var(--text-weight-semi);
     line-height: 0.95;
     letter-spacing: var(--display-tracking);
@@ -501,13 +487,55 @@ strong {
 
 /* The locked tagline sits beneath the wordmark, never reworded. */
 .hero__tagline {
+    font-style: var(--text-style-voice);
     width: fit-content;
     margin-top: clamp(14px, 2vh, 22px);
     color: var(--text-body);
-    font-size: clamp(var(--text-4), 2.2vw, var(--text-2));
+    font-size: var(--text-4);
     font-weight: var(--text-weight-semi);
     line-height: var(--text-leading-tight);
     text-shadow: var(--text-shadow-meta);
+}
+
+/* The plain-words offer under the mark: upright, calm, and short enough to read in one glance. */
+.hero__offer {
+    max-width: 26ch;
+    margin-top: clamp(16px, 2.4vh, 28px);
+    color: var(--text-body);
+    font-size: clamp(21px, 2.3vw, 30px);
+    font-weight: var(--text-weight-semi);
+    line-height: var(--text-leading-tight);
+    text-shadow: var(--text-shadow-meta);
+    text-wrap: balance;
+}
+
+/* The risk said beside every Telegram button, never only in the footer. */
+.cta-risk {
+    max-width: 64ch;
+    text-wrap: balance;
+    color: var(--text-body); /* every risk line reads in one colour, never as faint fine print */
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
+    text-shadow: var(--text-shadow-meta);
+}
+
+.join .cta-risk {
+    margin-top: var(--space-4);
+}
+
+/* "Free" is the reassurance beside each button, so it reads in the body colour, not as fine print
+   (it also holds 4.5:1 over the closing card's lightest glass, where lavender measured 2.7:1). */
+.join .meta,
+.hero__cta .meta {
+    color: var(--text-body);
+}
+
+.join__help {
+    max-width: 46ch;
+    margin-top: var(--space-5);
+    color: var(--text-body);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
 }
 
 .hero__cta {
@@ -523,6 +551,7 @@ strong {
 .js .hero__coin,
 .js .hero__wordmark,
 .js .hero__tagline,
+.js .hero__offer,
 .js .hero__cta,
 .js .hero__rule {
     animation: fade-in var(--duration-glow) var(--ease-standard) both;
@@ -538,6 +567,10 @@ strong {
 
 .js .hero__tagline {
     animation-delay: 440ms;
+}
+
+.js .hero__offer {
+    animation-delay: 0.54s;
 }
 
 .js .hero__cta {
@@ -559,16 +592,113 @@ strong {
 .section {
     position: relative;
     isolation: isolate;
-    padding-block: var(--section-space);
+    /* Less room under a section than above the next one's rule, so a closing button never trails
+       off into a screen of empty dark. */
+    padding-block: var(--section-space) calc(var(--section-space) * 0.6);
 }
 
-.js [data-reveal] {
+/* Sections are hidden only once reveal.js is running (it adds .reveal-ready), so a visitor whose
+   script fails or is blocked still sees every section. */
+.reveal-ready [data-reveal] {
     opacity: 0;
     transition: opacity var(--duration-glow) var(--ease-standard) var(--reveal-delay, 0ms);
 }
 
-.js [data-reveal].is-in {
+.reveal-ready [data-reveal].is-in {
     opacity: 1;
+}
+
+/* ===================================================================== plate 02 — what lands in the group */
+
+.setup__intro {
+    max-width: 760px;
+}
+
+.setup__figure {
+    margin-top: var(--space-12);
+}
+
+/* The chart sits in a frame of the brand's own leading: a 2.2px gold edge around clear glass. */
+.setup__frame {
+    display: block;
+    padding: var(--space-3);
+    border: var(--leading-width) solid var(--border-strong);
+    background: var(--glass-fill);
+    cursor: zoom-in;
+    transition: var(--transition-interactive);
+}
+
+.setup__frame:hover {
+    border-color: var(--text-emphasis);
+    box-shadow: var(--glow-hover);
+}
+
+.setup__frame img {
+    width: 100%;
+    height: auto;
+    background: var(--surface-base);
+}
+
+.setup__caption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-10);
+    padding-block: var(--space-6);
+    border-bottom: var(--border-hair);
+    color: var(--text-body);
+    font-family: var(--font-mono);
+    font-size: var(--mono-2);
+    font-style: normal;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: var(--mono-tracking);
+}
+
+.setup__fact-label {
+    margin-right: var(--space-3);
+    color: var(--text-meta);
+    letter-spacing: var(--meta-tracking-tight);
+    text-transform: uppercase;
+}
+
+.setup__unset {
+    padding: var(--space-9);
+    border: 1px dashed var(--border-card);
+    color: var(--text-body);
+    font-size: var(--text-5);
+}
+
+.setup__risk {
+    margin-top: var(--space-6);
+    color: var(--text-body);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
+}
+
+.setup__points {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-10);
+    margin-top: var(--space-12);
+    padding-top: var(--space-9);
+    border-top: var(--border-hair);
+}
+
+.setup__point-title {
+    color: var(--text-body);
+    font-size: var(--text-4);
+    font-weight: var(--text-weight-semi);
+    line-height: var(--text-leading-tight);
+}
+
+.setup__point p {
+    margin-top: var(--space-3);
+    color: var(--text-meta);
+    font-size: var(--text-5);
+    line-height: var(--text-leading);
+}
+
+.setup__cta {
+    margin-top: var(--space-12);
 }
 
 /* ===================================================================== plate 02 — who we are */
@@ -578,7 +708,15 @@ strong {
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
     gap: clamp(40px, 6vw, var(--space-13));
     align-items: center;
-    margin-top: var(--gap-section);
+}
+
+/* No proof panel to sit beside: the text takes the full width at a readable measure. */
+.story__grid--solo {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.story__grid--solo .story__text {
+    max-width: 760px;
 }
 
 .values {
@@ -624,20 +762,6 @@ strong {
     padding: clamp(18px, 3vw, var(--pad-plate));
     overflow: hidden;
     border: var(--border-hair);
-}
-
-.proof__head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-5);
-    margin-bottom: var(--space-8);
-}
-
-.proof__head .meta {
-    color: var(--bright-gold);
-    text-shadow: var(--text-shadow-meta);
 }
 
 .proof__grid {
@@ -711,6 +835,103 @@ strong {
     text-shadow: var(--text-shadow-meta);
 }
 
+.story__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
+    margin-top: var(--space-12);
+}
+
+/* With no member screenshots, the panel holds a single pane: the trade record. */
+.proof--record {
+    display: grid;
+    place-items: center;
+    min-height: clamp(420px, 46vw, 600px);
+}
+
+.record {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: min(100%, 440px);
+    padding: clamp(24px, 3vw, 36px);
+    /* A deeper tint than the default glass, so the gold title, dates and link clear contrast over
+       the brightest panes behind them. */
+    background: var(--surface-glass-tint);
+}
+
+.proof__line + .record {
+    width: 100%;
+    margin-top: var(--space-10);
+}
+
+.record__title {
+    color: var(--text-display);
+    font-size: clamp(var(--text-2), 2.6vw, var(--text-1));
+    font-weight: var(--text-weight-semi);
+    line-height: 1.1;
+    text-wrap: balance;
+}
+
+/* The period the record covers, joined by a run of gold leading. */
+.record__range {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+    width: 100%;
+    margin-top: var(--space-7);
+    color: var(--text-emphasis);
+    font-family: var(--font-mono);
+    font-size: var(--mono-2);
+    font-style: normal;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: var(--mono-tracking);
+    text-transform: uppercase;
+}
+
+.record__to {
+    flex: 1 1 24px;
+    min-width: 24px;
+    height: var(--leading-width);
+    background: var(--border-strong);
+}
+
+.record__body {
+    margin-top: var(--space-7);
+    color: var(--text-body);
+    font-size: var(--text-5);
+    line-height: var(--text-leading-loose);
+    text-wrap: pretty;
+}
+
+.record__link {
+    margin-top: var(--space-9);
+    min-height: 44px;
+    max-width: 100%;
+    white-space: normal;
+}
+
+.record__unset {
+    margin-top: var(--space-9);
+    padding: var(--space-5) var(--space-6);
+    border: 1px dashed var(--border-card);
+    color: var(--text-body);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
+}
+
+.record__risk {
+    width: 100%;
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: var(--border-hair);
+    color: var(--text-body);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
+}
+
 /* ===================================================================== plate 03 — how we teach */
 
 /* Faint texture (0.15) behind the dense grid, feathered so it never reads as a coloured band. */
@@ -721,41 +942,159 @@ strong {
 
 .teach__intro {
     max-width: 760px;
-    margin-top: var(--gap-section);
-}
-
-.stats {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-top: var(--space-12);
-}
-
-.stat {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-3);
-    margin-top: var(--space-5);
-    color: var(--text-accent);
-    font-family: var(--font-mono);
-    font-style: normal;
-}
-
-.stat__value {
-    font-size: clamp(2.3rem, 4vw, var(--mono-hero));
-    font-weight: var(--mono-weight-bold);
-    line-height: 1;
-    letter-spacing: var(--mono-tracking);
-}
-
-.stat__unit {
-    font-size: var(--mono-2);
-    letter-spacing: var(--meta-tracking-tight);
-    text-transform: uppercase;
 }
 
 /* The steps sit on the same plate as the numbers: their borders overlap into one seam. */
 .steps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-top: -1px;
+    margin-top: var(--space-12);
+}
+
+.step__link {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    min-height: 44px;
+    color: var(--link-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.step__link:hover {
+    color: var(--link-color-hover);
+}
+
+/* ------------------------------------------------- the academy: three stages joined by leading */
+
+.academy {
+    display: grid;
+    gap: var(--space-11);
+    margin-top: var(--space-13);
+    padding-top: var(--space-11);
+    border-top: var(--border-plate);
+    scroll-margin-top: var(--space-11);
+}
+
+.academy__intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 640px;
+}
+
+.academy__title {
+    color: var(--text-display);
+    font-size: clamp(var(--text-2), 3vw, var(--text-1));
+    font-weight: var(--text-weight-semi);
+    line-height: 1.1;
+    text-wrap: balance;
+}
+
+/* The Academy's facts, said once: a short stacked list, each line led by a run of gold leading. */
+.academy__facts {
+    display: grid;
+    gap: var(--space-3);
+    margin-top: var(--space-7);
+    color: var(--text-emphasis);
+    font-family: var(--font-mono);
+    font-size: var(--mono-2);
+    font-style: normal;
+    letter-spacing: var(--mono-tracking);
+}
+
+.academy__facts li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+}
+
+.academy__facts li::before {
+    content: "";
+    flex: none;
+    width: var(--space-8);
+    height: 1px;
+    background: var(--border-strong);
+}
+
+.academy__body {
+    margin-top: var(--space-6);
+    color: var(--text-body);
+    font-size: var(--text-5);
+    line-height: var(--text-leading-loose);
+    text-wrap: pretty;
+}
+
+.academy__cta {
+    min-height: 44px;
+    margin-top: var(--space-9);
+    max-width: 100%;
+    white-space: normal;
+}
+
+.academy__note {
+    margin-top: var(--space-5);
+    color: var(--text-meta);
+    font-size: var(--text-small);
+}
+
+.academy__path {
+    --path-gap: var(--space-11);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--path-gap);
+}
+
+.academy__stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    min-width: 0;
+}
+
+/* The leading that joins one pane to the next. */
+.academy__stage + .academy__stage::before {
+    content: "";
+    position: absolute;
+    top: var(--space-12);
+    left: calc(-1 * var(--path-gap) - 1px);
+    width: var(--path-gap);
+    height: var(--leading-width);
+    background: var(--border-strong);
+}
+
+.academy__stage-num {
+    color: var(--text-emphasis);
+    font-family: var(--font-mono);
+    font-size: var(--mono-2);
+    font-style: normal;
+    letter-spacing: var(--meta-tracking-tight);
+    text-transform: uppercase;
+}
+
+.academy__stage-title {
+    margin: 0;
+    color: var(--text-body);
+    font-size: var(--text-3);
+    font-weight: var(--text-weight-semi);
+    line-height: var(--text-leading-tight);
+    text-wrap: balance;
+}
+
+.academy__stage p {
+    color: var(--text-body);
+    font-size: var(--text-5);
+    line-height: var(--text-leading-loose);
+}
+
+.academy__stage .academy__disclosure {
+    margin-top: auto;
+    padding-top: var(--space-5);
+    border-top: var(--border-hair);
+    color: var(--text-meta);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
 }
 
 .step__title {
@@ -780,7 +1119,7 @@ strong {
     isolation: isolate;
     display: grid;
     place-items: center;
-    min-height: clamp(640px, 92svh, 920px);
+    min-height: clamp(560px, 72svh, 760px);
     padding: var(--section-space) var(--gutter);
     overflow: hidden;
     background: var(--surface-base);
@@ -808,29 +1147,8 @@ strong {
     box-shadow: var(--glow-coin);
 }
 
-.join__wordmark {
-    color: var(--text-display);
-    font-family: var(--font-text);
-    font-size: clamp(2.8rem, 7vw, 4.25rem);
-    font-style: italic;
-    font-weight: var(--text-weight-semi);
-    line-height: 1;
-    letter-spacing: var(--display-tracking);
-    text-shadow: var(--text-shadow-hook);
-}
-
-.join__tagline {
-    margin-top: var(--space-4);
-    color: var(--text-body);
-    font-size: var(--text-4);
-    font-weight: var(--text-weight-semi);
-}
-
 .join__title {
     width: 100%;
-    margin-top: var(--space-10);
-    padding-top: var(--space-10);
-    border-top: var(--border-hair);
     color: var(--text-accent);
     font-size: clamp(var(--text-2), 3vw, var(--text-1));
     font-weight: var(--text-weight-semi);
@@ -861,21 +1179,6 @@ strong {
     background: var(--surface-base);
 }
 
-.footer__rule {
-    border-top: var(--border-plate);
-    border-bottom: 0;
-}
-
-.footer__tagline {
-    color: var(--text-body);
-    font-family: var(--font-text);
-    font-size: var(--text-5);
-    font-style: italic;
-    font-weight: var(--text-weight-semi);
-    letter-spacing: normal;
-    text-transform: none;
-}
-
 .footer__top {
     display: flex;
     flex-wrap: wrap;
@@ -903,7 +1206,7 @@ strong {
 .footer__wordmark {
     font-family: var(--font-text);
     font-size: var(--text-2);
-    font-style: italic;
+    font-style: var(--text-style-voice);
     font-weight: var(--text-weight-semi);
     line-height: 1;
     letter-spacing: var(--display-tracking-2);
@@ -912,12 +1215,21 @@ strong {
 .footer__nav {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-4) var(--space-9);
+    gap: 0 var(--space-9);
     font-family: var(--font-mono);
-    font-size: var(--meta-small);
+    font-size: var(--mono-2);
     font-style: normal;
     letter-spacing: var(--meta-tracking);
     text-transform: uppercase;
+}
+
+/* Each link is a full 44px-tall target, however short its label. */
+.footer__nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
 }
 
 .footer__legal {
@@ -936,6 +1248,7 @@ strong {
 }
 
 .footer__line {
+    font-style: var(--text-style-voice);
     font-weight: var(--text-weight-semi);
 }
 
@@ -1093,20 +1406,22 @@ strong {
 @media (min-width: 1024px) {
     .hero__coin {
         width: clamp(280px, 40vh, 448px);
-        margin-bottom: clamp(28px, 3.6vh, 48px);
+        margin-bottom: clamp(20px, 2.4vh, 40px);
     }
 
-    /* Tighter rhythm so the larger coin, the title and the button all fit on the first screen. */
+    /* Tighter rhythm so the larger coin, the mark, the offer and the button all fit on the first
+       screen. The coin keeps its size; the wordmark and the gaps give way instead. */
     .hero {
-        padding-top: clamp(64px, 8vh, 120px);
+        padding-top: clamp(28px, 3vh, 120px);
+        padding-bottom: clamp(120px, 18vh, 220px);
     }
 
     .hero__wordmark {
-        font-size: clamp(3.4rem, min(15vw, 22vh), 12.5rem);
+        font-size: clamp(3.4rem, min(15vw, 16vh), 12.5rem);
     }
 
     .hero__cta {
-        margin-top: clamp(28px, 4.5vh, 64px);
+        margin-top: clamp(20px, 3vh, 64px);
     }
 }
 
@@ -1115,23 +1430,40 @@ strong {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .stats,
+    .setup__points,
+    .academy__path {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .setup__points {
+        gap: var(--space-8);
+    }
+
+    .academy__path {
+        --path-gap: var(--space-9);
+    }
+
+    /* Stacked, the leading runs down from one pane to the next. */
+    .academy__stage + .academy__stage::before {
+        top: calc(-1 * var(--path-gap) - 1px);
+        left: var(--space-11);
+        width: var(--leading-width);
+        height: var(--path-gap);
+    }
+
     .steps {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 639px) {
-    .hero__rule .meta-extra {
+    /* On phones a loose pane drifts across the corner, and the hero offer already says what this is. */
+    .hero__rule span + span {
         display: none;
     }
 
     .steps {
         grid-template-columns: minmax(0, 1fr);
-    }
-
-    .plate-cell__fig {
-        display: none;
     }
 
     .proof__grid {
@@ -1165,7 +1497,7 @@ strong {
         scroll-behavior: auto;
     }
 
-    .js [data-reveal] {
+    .reveal-ready [data-reveal] {
         opacity: 1;
         transition: none;
     }
