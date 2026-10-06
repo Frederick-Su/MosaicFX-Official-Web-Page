@@ -157,7 +157,7 @@ class HomePageTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSeeInOrder(['Inside Mosaic Academy.', 'Trading from zero.', 'MosaicFX strategies.', 'The apps, hands-on.'])
-            ->assertSee('Ask about the Academy in the group')
+            ->assertSee('Ask about the Academy')
             ->assertSee('MetaTrader 5, TradingView and Exness')
             ->assertSee('MosaicFX earns a commission if you open an account through our link.')
             ->assertSeeInOrder(['21 lessons', 'Video + written notes', 'Quiz breaks', 'About 3 a day, at your own pace'])
@@ -240,5 +240,25 @@ class HomePageTest extends TestCase
 
         $this->assertSame(1, substr_count($content, 'wins and losses'));
         $this->assertSame(1, substr_count($content, 'message us'));
+    }
+
+    public function test_the_buttons_say_what_is_free_and_that_telegram_opens(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Opens in the Telegram app')
+            ->assertSee('New to Telegram?')
+            ->assertDontSee('Learn at your own pace')
+            ->assertDontSee('each lesson builds on the last');
+    }
+
+    public function test_the_record_and_its_button_share_one_risk_line(): void
+    {
+        config(['mosaic.trade_record.url' => 'https://example.com/record']);
+
+        $content = $this->get('/')->assertOk()->getContent();
+
+        // Hero and closing frame; the button after the record leans on the record's own risk line.
+        $this->assertSame(2, substr_count($content, 'class="cta-risk"'));
     }
 }

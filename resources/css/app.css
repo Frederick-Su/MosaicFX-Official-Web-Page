@@ -513,7 +513,7 @@ strong {
 .cta-risk {
     max-width: 64ch;
     text-wrap: balance;
-    color: var(--text-meta);
+    color: var(--text-body); /* every risk line reads in one colour, never as faint fine print */
     font-size: var(--text-small);
     line-height: var(--text-leading);
     text-shadow: var(--text-shadow-meta);
@@ -523,11 +523,19 @@ strong {
     margin-top: var(--space-4);
 }
 
-/* The closing card sits over the lightest stretch of glass; its small print takes the body colour
-   so it holds 4.5:1 there (lavender measured 2.7:1). */
-.join .cta-risk,
-.join .meta {
+/* "Free" is the reassurance beside each button, so it reads in the body colour, not as fine print
+   (it also holds 4.5:1 over the closing card's lightest glass, where lavender measured 2.7:1). */
+.join .meta,
+.hero__cta .meta {
     color: var(--text-body);
+}
+
+.join__help {
+    max-width: 46ch;
+    margin-top: var(--space-5);
+    color: var(--text-body);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
 }
 
 .hero__cta {
@@ -584,7 +592,9 @@ strong {
 .section {
     position: relative;
     isolation: isolate;
-    padding-block: var(--section-space);
+    /* Less room under a section than above the next one's rule, so a closing button never trails
+       off into a screen of empty dark. */
+    padding-block: var(--section-space) calc(var(--section-space) * 0.6);
 }
 
 /* Sections are hidden only once reveal.js is running (it adds .reveal-ready), so a visitor whose
@@ -942,9 +952,9 @@ strong {
 
 .step__link {
     display: inline-flex;
+    align-self: flex-start;
     align-items: center;
     min-height: 44px;
-    margin-top: var(--space-3);
     color: var(--link-color);
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -1402,12 +1412,12 @@ strong {
     /* Tighter rhythm so the larger coin, the mark, the offer and the button all fit on the first
        screen. The coin keeps its size; the wordmark and the gaps give way instead. */
     .hero {
-        padding-top: clamp(40px, 5vh, 120px);
+        padding-top: clamp(28px, 3vh, 120px);
         padding-bottom: clamp(120px, 18vh, 220px);
     }
 
     .hero__wordmark {
-        font-size: clamp(3.4rem, min(15vw, 18vh), 12.5rem);
+        font-size: clamp(3.4rem, min(15vw, 16vh), 12.5rem);
     }
 
     .hero__cta {

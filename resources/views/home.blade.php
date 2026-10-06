@@ -48,7 +48,7 @@
 
             <div class="hero__cta" data-glass-keepout data-glass-floor>
                 <x-telegram-button size="xl" />
-                <p class="meta">Free to join <span aria-hidden="true">·</span> Learn at your own pace</p>
+                <p class="meta">Free group <span aria-hidden="true">·</span> Opens in the Telegram app</p>
                 <p class="cta-risk">Trading carries a high risk of loss. Education, not financial advice.</p>
             </div>
         </div>
@@ -198,7 +198,10 @@
             {{-- The door again, right after the proof, so nobody scrolls the long middle without one. --}}
             <div class="story__cta" data-reveal>
                 <x-telegram-button size="xl" />
-                <p class="cta-risk">Trading carries a high risk of loss. Education, not financial advice.</p>
+                {{-- The trade record's own risk line sits just above; say it here only when the record is hidden. --}}
+                @unless ($showRecord)
+                    <p class="cta-risk">Trading carries a high risk of loss. Education, not financial advice.</p>
+                @endunless
             </div>
         </div>
     </section>
@@ -223,7 +226,8 @@
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Step 02</span><span>The academy</span></span>
                     <h3 class="step__title">Learn with Mosaic Academy.</h3>
-                    <p>Twenty-one short lessons at your own pace: the basics, then our backtested strategies, then the apps. <a class="step__link" href="#academy">See what's inside</a></p>
+                    <p>Short lessons that go from the basics to our backtested strategies, then the apps.</p>
+                    <a class="step__link" href="#academy">See what's inside</a>
                 </li>
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Step 03</span><span>Practice</span></span>
@@ -248,7 +252,7 @@
                         <li>About 3 a day, at your own pace</li>
                     </ul>
                     <p class="academy__body">It runs in three stages, and each one builds on the last.</p>
-                    <x-telegram-button label="Ask about the Academy in the group" variant="outline" class="academy__cta" />
+                    <x-telegram-button label="Ask about the Academy" variant="outline" class="academy__cta" />
                     <p class="academy__note">Access is arranged by an admin in our Telegram group.</p>
                 </div>
 
@@ -256,7 +260,7 @@
                     <li class="academy__stage glass-card">
                         <span class="academy__stage-num">Stage 1</span>
                         <h4 class="academy__stage-title">Trading from zero.</h4>
-                        <p>No prior knowledge assumed. The basics of how a trade works come first, and each lesson builds on the last.</p>
+                        <p>No prior knowledge assumed. The basics of how a trade works come first.</p>
                     </li>
                     <li class="academy__stage glass-card">
                         <span class="academy__stage-num">Stage 2</span>
@@ -283,8 +287,9 @@
             <img class="join__coin" src="{{ asset('images/brand/coin-512.webp') }}" alt="" width="512" height="512" loading="lazy">
             <h2 class="join__title" id="join-title">We build the picture together.</h2>
             <p class="join__body">Join the free Telegram group. Read along, ask anything, and start when you're ready. No pressure, no countdowns.</p>
+            <p class="join__help">New to Telegram? It's a free messaging app, and the button will take you there.</p>
             <x-telegram-button size="xl" />
-            <p class="meta">Free to join <span aria-hidden="true">·</span> Leave anytime</p>
+            <p class="meta">Free <span aria-hidden="true">·</span> Leave anytime</p>
             <p class="cta-risk">Trading carries a high risk of loss. Education, not financial advice.</p>
         </div>
     </section>
@@ -299,6 +304,7 @@
                 <span class="footer__wordmark">{{ $name }}</span>
             </a>
             <nav class="footer__nav" aria-label="Footer">
+                @if ($showSetup)<a href="#setups">Setups</a>@endif
                 <a href="#story">Who we are</a>
                 <a href="#how-we-teach">How we teach</a>
                 <a href="#join">Join</a>
