@@ -32,6 +32,26 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Trade record
+    |--------------------------------------------------------------------------
+    |
+    | The public record of every trade taken, wins and losses. It is the proof
+    | panel beside "who we are". Set the link and the period it covers in your
+    | .env file, written as you want them read: MOSAIC_TRADE_RECORD_FROM="March
+    | 2024". Leave MOSAIC_TRADE_RECORD_TO empty while the record is still
+    | running and the page says "to today". Until the link is set, a production
+    | page leaves the panel out rather than point at proof that isn't there.
+    |
+    */
+
+    'trade_record' => [
+        'url' => env('MOSAIC_TRADE_RECORD_URL'),
+        'from' => env('MOSAIC_TRADE_RECORD_FROM'),
+        'to' => env('MOSAIC_TRADE_RECORD_TO'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Testimonials
     |--------------------------------------------------------------------------
     |
@@ -39,7 +59,8 @@ return [
     | panel, sorted by file name. To swap in real screenshots, delete the
     | placeholder files and drop yours in (jpg, png, webp, avif, gif or svg).
     | Name them 01-..., 02-... to control the order. Real proof only: the
-    | brand never shows an invented result.
+    | brand never shows an invented result, so files named placeholder-* are
+    | always skipped.
     |
     */
 

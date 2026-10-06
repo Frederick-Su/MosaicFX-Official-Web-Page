@@ -284,6 +284,18 @@ strong {
     display: none;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* ===================================================================== buttons */
 
 .btn {
@@ -317,6 +329,19 @@ strong {
     border-color: var(--action-fill-hover);
     background: var(--action-fill-hover);
     color: var(--action-text);
+    box-shadow: var(--glow-hover);
+}
+
+/* The secondary action: gold leading around clear glass, so it never competes with the one ask. */
+.btn--outline {
+    border-color: var(--border-strong);
+    background: transparent;
+    color: var(--text-accent);
+}
+
+.btn--outline:hover {
+    border-color: var(--action-fill-hover);
+    color: var(--text-emphasis);
     box-shadow: var(--glow-hover);
 }
 
@@ -562,12 +587,14 @@ strong {
     padding-block: var(--section-space);
 }
 
-.js [data-reveal] {
+/* Sections are hidden only once reveal.js is running (it adds .reveal-ready), so a visitor whose
+   script fails or is blocked still sees every section. */
+.reveal-ready [data-reveal] {
     opacity: 0;
     transition: opacity var(--duration-glow) var(--ease-standard) var(--reveal-delay, 0ms);
 }
 
-.js [data-reveal].is-in {
+.reveal-ready [data-reveal].is-in {
     opacity: 1;
 }
 
@@ -579,6 +606,15 @@ strong {
     gap: clamp(40px, 6vw, var(--space-13));
     align-items: center;
     margin-top: var(--gap-section);
+}
+
+/* No proof panel to sit beside: the text takes the full width at a readable measure. */
+.story__grid--solo {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.story__grid--solo .story__text {
+    max-width: 760px;
 }
 
 .values {
@@ -709,6 +745,92 @@ strong {
     color: var(--text-body);
     font-size: var(--text-5);
     text-shadow: var(--text-shadow-meta);
+}
+
+/* With no member screenshots, the panel holds a single pane: the trade record. */
+.proof--record {
+    display: grid;
+    place-items: center;
+    min-height: clamp(420px, 46vw, 600px);
+}
+
+.record {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: min(100%, 440px);
+    padding: clamp(24px, 3vw, 36px);
+}
+
+.proof__line + .record {
+    width: 100%;
+    margin-top: var(--space-10);
+}
+
+.record__title {
+    color: var(--text-display);
+    font-size: clamp(var(--text-2), 2.6vw, var(--text-1));
+    font-weight: var(--text-weight-semi);
+    line-height: 1.1;
+    text-wrap: balance;
+}
+
+/* The period the record covers, joined by a run of gold leading. */
+.record__range {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+    width: 100%;
+    margin-top: var(--space-7);
+    color: var(--text-emphasis);
+    font-family: var(--font-mono);
+    font-size: var(--mono-2);
+    font-style: normal;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: var(--mono-tracking);
+    text-transform: uppercase;
+}
+
+.record__to {
+    flex: 1 1 24px;
+    min-width: 24px;
+    height: var(--leading-width);
+    background: var(--border-strong);
+}
+
+.record__body {
+    margin-top: var(--space-7);
+    color: var(--text-body);
+    font-size: var(--text-5);
+    line-height: var(--text-leading-loose);
+    text-wrap: pretty;
+}
+
+.record__link {
+    margin-top: var(--space-9);
+    min-height: 44px;
+    max-width: 100%;
+    white-space: normal;
+}
+
+.record__unset {
+    margin-top: var(--space-9);
+    padding: var(--space-5) var(--space-6);
+    border: 1px dashed var(--border-card);
+    color: var(--text-body);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
+}
+
+.record__risk {
+    width: 100%;
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: var(--border-hair);
+    color: var(--text-body);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
 }
 
 /* ===================================================================== plate 03 — how we teach */
@@ -1165,7 +1287,7 @@ strong {
         scroll-behavior: auto;
     }
 
-    .js [data-reveal] {
+    .reveal-ready [data-reveal] {
         opacity: 1;
         transition: none;
     }

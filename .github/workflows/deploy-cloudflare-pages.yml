@@ -43,6 +43,9 @@ jobs:
           APP_ENV: production
           APP_DEBUG: 'false'
           MOSAIC_TELEGRAM_URL: ${{ vars.MOSAIC_TELEGRAM_URL }}
+          MOSAIC_TRADE_RECORD_URL: ${{ vars.MOSAIC_TRADE_RECORD_URL }}
+          MOSAIC_TRADE_RECORD_FROM: ${{ vars.MOSAIC_TRADE_RECORD_FROM }}
+          MOSAIC_TRADE_RECORD_TO: ${{ vars.MOSAIC_TRADE_RECORD_TO }}
         run: |
           npm run build
           php artisan site:export --url="${{ vars.SITE_URL || format('https://{0}.pages.dev', vars.CLOUDFLARE_PROJECT_NAME) }}"

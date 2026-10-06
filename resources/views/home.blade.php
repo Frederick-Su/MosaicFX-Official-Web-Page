@@ -4,6 +4,10 @@
     $name = config('mosaic.name');
     $tagline = config('mosaic.tagline');
     $fig = fn (int $i) => 'Fig. '.str_pad((string) ($i + 1), 2, '0', STR_PAD_LEFT);
+    // Proof is shown only when it's real: member screenshots, the trade record link, or (locally) the reminder to set it.
+    $record = config('mosaic.trade_record');
+    $showRecord = filled($record['url']) || app()->isLocal();
+    $showProof = $testimonials->isNotEmpty() || $showRecord;
 @endphp
 
 @section('title', $name.' — '.$tagline)
@@ -53,7 +57,7 @@
                 <h2 class="plate-header__title" id="story-title">Section I — who we are.</h2>
             </header>
 
-            <div class="story__grid">
+            <div @class(['story__grid', 'story__grid--solo' => ! $showProof])>
                 <div class="story__text" data-reveal data-reveal-delay="120">
                     <p class="hook">One pane at a time</p>
                     <p class="lead">MosaicFX is a trading community that learns together. We show the wins and the losses, all of them, because trust is built on the whole picture, not a highlight reel.</p>
@@ -84,13 +88,9 @@
                     </ol>
                 </div>
 
-                <div class="proof" data-proof data-reveal data-reveal-delay="220">
+                @if ($showProof)
+                <div @class(['proof', 'proof--record' => $testimonials->isEmpty()]) data-proof data-reveal data-reveal-delay="220">
                     <x-mosaic-texture class="proof__texture" :opacity="0.5" />
-
-                    <div class="proof__head">
-                        <span class="badge">Real proof only</span>
-                        <span class="meta">From our members</span>
-                    </div>
 
                     @if ($testimonials->isNotEmpty())
                         <div class="proof__grid">
@@ -114,10 +114,36 @@
                             @endforeach
                         </div>
                         <script type="application/json" data-lightbox-items>@json($testimonials->values())</script>
+                        <p class="proof__line">Shared with permission. Every size of win counts.</p>
                     @endif
 
-                    <p class="proof__line">Shared with permission. Every size of win counts.</p>
+                    @if ($showRecord)
+                        {{-- The whole record, not a highlight reel: one glass pane, one link, and the risk said beside it. --}}
+                        <div class="record glass-card">
+                            <h3 class="record__title">The full trade record.</h3>
+                            @if ($record['from'])
+                                <p class="record__range">
+                                    <span>{{ $record['from'] }}</span>
+                                    <span class="record__to" aria-hidden="true"></span>
+                                    <span class="sr-only">to</span>
+                                    <span>{{ $record['to'] ?: 'Today' }}</span>
+                                </p>
+                            @endif
+                            <p class="record__body">Every trade we've taken, wins and losses both. Read it before you decide to trust us.</p>
+                            @if ($record['url'])
+                                <a href="{{ $record['url'] }}" target="_blank" rel="noopener" class="btn btn--outline btn--lg record__link">
+                                    <span>Open the trade record</span>
+                                    <x-icon name="arrow-up-right" class="btn__icon" />
+                                    <span class="sr-only">(opens in a new tab)</span>
+                                </a>
+                            @else
+                                <p class="record__unset">Trade record link not set yet. Add MOSAIC_TRADE_RECORD_URL to your .env file. Production pages hide this panel until it's set.</p>
+                            @endif
+                            <p class="record__risk">Past results don't guarantee future performance. Trading carries a high risk of loss.</p>
+                        </div>
+                    @endif
                 </div>
+                @endif
             </div>
         </div>
     </section>
@@ -229,6 +255,7 @@
     </div>
 </footer>
 
+@if ($testimonials->isNotEmpty())
 <dialog class="lightbox" data-lightbox-dialog aria-labelledby="lightbox-title">
     <div class="lightbox__plate">
         <div class="lightbox__head">
@@ -250,6 +277,7 @@
         </div>
     </div>
 </dialog>
+@endif
 
 <div class="toast" data-toast role="status" aria-live="polite" hidden>
     <x-icon name="info" class="toast__icon" />

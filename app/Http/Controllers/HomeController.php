@@ -19,7 +19,8 @@ class HomeController extends Controller
     }
 
     /**
-     * Every image in the configured testimonials folder, in natural file-name order.
+     * Every image in the configured testimonials folder, in natural file-name order. Placeholder
+     * artwork never reaches the page, even if it's left in the folder.
      */
     private function testimonials(): Collection
     {
@@ -32,6 +33,7 @@ class HomeController extends Controller
 
         return collect(File::files($directory))
             ->filter(fn (SplFileInfo $file) => in_array(strtolower($file->getExtension()), self::IMAGE_EXTENSIONS))
+            ->reject(fn (SplFileInfo $file) => str_starts_with(strtolower($file->getFilename()), 'placeholder'))
             ->sort(fn (SplFileInfo $a, SplFileInfo $b) => strnatcasecmp($a->getFilename(), $b->getFilename()))
             ->values()
             ->map(function (SplFileInfo $file, int $index) use ($relative) {
