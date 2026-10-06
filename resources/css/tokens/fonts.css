@@ -1,7 +1,8 @@
 /* Mosaic FX — the three locked typefaces. No fourth font, ever.
    Copied from the design system's tokens/fonts.css. The font files themselves load from
    their official foundries (Fontshare for Clash Display, Google Fonts for Fraunces and
-   IBM Plex Mono) via <link> tags in resources/views/layouts/app.blade.php. */
+   IBM Plex Mono) via <link> tags in resources/views/layouts/app.blade.php. Fraunces loads in both
+   upright (body copy) and italic (wordmark and slogans). */
 
 :root {
   --font-display: "Clash Display", "Archivo Black", sans-serif;

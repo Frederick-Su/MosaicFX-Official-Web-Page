@@ -37,7 +37,8 @@ html.is-locked {
     overflow: hidden;
 }
 
-/* Fraunces Italic for everything readable. */
+/* Fraunces, upright, for everything readable. Italic is the brand's voice and is kept for the
+   wordmark and the slogans (see --text-style-voice). */
 body {
     margin: 0;
     min-height: 100vh;
@@ -45,7 +46,7 @@ body {
     color: var(--text-body);
     font-family: var(--font-text);
     font-size: var(--text-4);
-    font-style: italic;
+    font-style: var(--text-style);
     font-weight: var(--text-weight);
     line-height: var(--text-leading);
     -webkit-font-smoothing: antialiased;
@@ -132,7 +133,7 @@ strong {
     font-style: normal;
     font-weight: var(--display-weight);
     line-height: var(--display-leading-2);
-    letter-spacing: var(--display-tracking);
+    letter-spacing: 0; /* negative tracking closed the word spaces in uppercase Clash */
     text-transform: uppercase;
     text-wrap: balance;
 }
@@ -195,30 +196,11 @@ strong {
     text-transform: uppercase;
 }
 
-/* Section header: plate ref in mono, italic section title in gold, under a gold rule. */
-.plate-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: var(--space-3) var(--space-7);
-    padding-top: var(--space-6);
+/* Each section opens under a gold rule with two levels only: the headline (.hook, an h2) and
+   the lead paragraph beneath it. */
+.section > .container {
+    padding-top: var(--gap-section);
     border-top: var(--border-plate);
-}
-
-.plate-header__plate {
-    color: var(--text-meta);
-    font-family: var(--font-mono);
-    font-size: var(--meta);
-    font-style: normal;
-    letter-spacing: var(--meta-tracking);
-    text-transform: uppercase;
-}
-
-.plate-header__title {
-    color: var(--text-accent);
-    font-size: clamp(var(--text-2), 3vw, var(--text-1));
-    font-weight: var(--text-weight-semi);
-    line-height: 1.1;
 }
 
 /* Editorial Plate grid: cells divided by a 1px gold seam (the grid gap showing through). */
@@ -516,7 +498,7 @@ strong {
     padding-inline: 0.06em 0.12em;
     font-family: var(--font-text);
     font-size: clamp(3.4rem, 15vw, 12.5rem);
-    font-style: italic;
+    font-style: var(--text-style-voice);
     font-weight: var(--text-weight-semi);
     line-height: 0.95;
     letter-spacing: var(--display-tracking);
@@ -526,6 +508,7 @@ strong {
 
 /* The locked tagline sits beneath the wordmark, never reworded. */
 .hero__tagline {
+    font-style: var(--text-style-voice);
     width: fit-content;
     margin-top: clamp(14px, 2vh, 22px);
     color: var(--text-body);
@@ -602,7 +585,6 @@ strong {
 
 .setup__intro {
     max-width: 760px;
-    margin-top: var(--gap-section);
 }
 
 .setup__figure {
@@ -699,7 +681,6 @@ strong {
     grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
     gap: clamp(40px, 6vw, var(--space-13));
     align-items: center;
-    margin-top: var(--gap-section);
 }
 
 /* No proof panel to sit beside: the text takes the full width at a readable measure. */
@@ -937,7 +918,6 @@ strong {
 
 .teach__intro {
     max-width: 760px;
-    margin-top: var(--gap-section);
 }
 
 .stats {
@@ -1148,7 +1128,7 @@ strong {
     color: var(--text-display);
     font-family: var(--font-text);
     font-size: clamp(2.8rem, 7vw, 4.25rem);
-    font-style: italic;
+    font-style: var(--text-style-voice);
     font-weight: var(--text-weight-semi);
     line-height: 1;
     letter-spacing: var(--display-tracking);
@@ -1156,6 +1136,7 @@ strong {
 }
 
 .join__tagline {
+    font-style: var(--text-style-voice);
     margin-top: var(--space-4);
     color: var(--text-body);
     font-size: var(--text-4);
@@ -1206,7 +1187,7 @@ strong {
     color: var(--text-body);
     font-family: var(--font-text);
     font-size: var(--text-5);
-    font-style: italic;
+    font-style: var(--text-style-voice);
     font-weight: var(--text-weight-semi);
     letter-spacing: normal;
     text-transform: none;
@@ -1239,7 +1220,7 @@ strong {
 .footer__wordmark {
     font-family: var(--font-text);
     font-size: var(--text-2);
-    font-style: italic;
+    font-style: var(--text-style-voice);
     font-weight: var(--text-weight-semi);
     line-height: 1;
     letter-spacing: var(--display-tracking-2);
@@ -1248,12 +1229,19 @@ strong {
 .footer__nav {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-4) var(--space-9);
+    gap: 0 var(--space-9);
     font-family: var(--font-mono);
-    font-size: var(--meta-small);
+    font-size: var(--mono-2);
     font-style: normal;
     letter-spacing: var(--meta-tracking);
     text-transform: uppercase;
+}
+
+/* Each link is a full 44px-tall target, however short its label. */
+.footer__nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
 }
 
 .footer__legal {
@@ -1272,6 +1260,7 @@ strong {
 }
 
 .footer__line {
+    font-style: var(--text-style-voice);
     font-weight: var(--text-weight-semi);
 }
 

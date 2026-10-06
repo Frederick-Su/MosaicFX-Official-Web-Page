@@ -1,5 +1,6 @@
 /* Mosaic FX — type scale, lifted from the brand reference plate.
-   Clash Display for the big word. Fraunces Italic for everything readable.
+   Clash Display for the big word. Fraunces for everything readable: upright for reading,
+   italic kept for the wordmark and the slogans.
    IBM Plex Mono for numerals and tracked meta labels. */
 
 :root {
@@ -17,7 +18,7 @@
   --display-tracking: -0.02em;
   --display-tracking-2: -0.005em;
 
-  /* Text — Fraunces, always italic */
+  /* Text — Fraunces, upright for reading; italic only for the wordmark and slogans */
   --text-hero: 40px;
   --text-1: 32px;
   --text-2: 25px;
@@ -32,21 +33,23 @@
   --text-leading-tight: 1.25;
   --text-leading: 1.5;
   --text-leading-loose: 1.6;
-  --text-style: italic;
+  --text-style: normal;
+  --text-style-voice: italic;
 
   /* Numerals & meta — IBM Plex Mono */
   --mono-hero: 52px;
   --mono-1: 19px;
   --mono-2: 13px;
-  --mono-3: 11.5px;
-  --meta: 11px;
-  --meta-small: 10px;
-  --meta-xs: 9.5px;
+  /* Labels never drop below 12px. Tracking eases as the size rises, so the line lengths hold. */
+  --mono-3: 12px;
+  --meta: 12px;
+  --meta-small: 12px;
+  --meta-xs: 12px;
   --mono-weight: 400;
   --mono-weight-mid: 500;
   --mono-weight-bold: 600;
-  --meta-tracking: 0.2em;
-  --meta-tracking-tight: 0.18em;
+  --meta-tracking: 0.14em;
+  --meta-tracking-tight: 0.12em;
   --mono-tracking: 0.04em;
 
   /* Measure */

@@ -55,13 +55,9 @@
     @if ($showSetup)
     <section class="section setup" id="setups" aria-labelledby="setup-title">
         <div class="container">
-            <header class="plate-header" data-reveal>
-                <span class="plate-header__plate">Plate 02</span>
-                <h2 class="plate-header__title" id="setup-title">Section I — what lands in the group.</h2>
-            </header>
 
             <div class="setup__intro" data-reveal data-reveal-delay="120">
-                <p class="hook">Spot the setup</p>
+                <h2 class="hook" id="setup-title">Spot the setup</h2>
                 <p class="lead">This is what we share in the free Telegram group: real setups on the chart, with the entry, the stop and the target marked.</p>
             </div>
 
@@ -117,14 +113,10 @@
     {{-- ============================================================ PLATE 03 — WHO WE ARE + MEMBER PROOF --}}
     <section class="section story" id="story" aria-labelledby="story-title">
         <div class="container">
-            <header class="plate-header" data-reveal>
-                <span class="plate-header__plate">Plate {{ $showSetup ? '03' : '02' }}</span>
-                <h2 class="plate-header__title" id="story-title">Section {{ $showSetup ? 'II' : 'I' }} — who we are.</h2>
-            </header>
 
             <div @class(['story__grid', 'story__grid--solo' => ! $showProof])>
                 <div class="story__text" data-reveal data-reveal-delay="120">
-                    <p class="hook">One pane at a time</p>
+                    <h2 class="hook" id="story-title">One pane at a time</h2>
                     <p class="lead">MosaicFX is a trading community that learns together. We show the wins and the losses, all of them, because trust is built on the whole picture, not a highlight reel.</p>
                     <p class="body">You don't have to figure this out alone, and you don't have to rush. A brand-new member isn't a lesser trader, just a pane that hasn't been placed yet.</p>
 
@@ -218,13 +210,9 @@
         <x-mosaic-texture class="teach__texture" :opacity="0.15" />
 
         <div class="container">
-            <header class="plate-header" data-reveal>
-                <span class="plate-header__plate">Plate {{ $showSetup ? '04' : '03' }}</span>
-                <h2 class="plate-header__title" id="teach-title">Section {{ $showSetup ? 'III' : 'II' }} — how we teach.</h2>
-            </header>
 
             <div class="teach__intro" data-reveal data-reveal-delay="120">
-                <p class="hook">One path, end to end</p>
+                <h2 class="hook" id="teach-title">One path, end to end</h2>
                 <p class="lead">Nobody becomes a trader in a day. We start from zero and stay with you the whole way, one pane at a time.</p>
             </div>
 

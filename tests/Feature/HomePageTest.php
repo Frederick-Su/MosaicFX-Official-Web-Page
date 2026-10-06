@@ -20,8 +20,9 @@ class HomePageTest extends TestCase
             ->assertOk()
             ->assertSee(config('mosaic.name'))
             ->assertSee('Smart Trades, Big Effects')
-            ->assertSee('Section I — who we are.')
-            ->assertSee('Section II — how we teach.')
+            ->assertSee('<h2 class="hook" id="story-title">One pane at a time</h2>', false)
+            ->assertSee('<h2 class="hook" id="teach-title">One path, end to end</h2>', false)
+            ->assertDontSee('plate-header', false)
             ->assertSee('We build the picture together.')
             ->assertSee('End of Plate')
             ->assertSee('Risk disclaimer.', false);
@@ -171,7 +172,7 @@ class HomePageTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertDontSee('id="setups"', false)
-            ->assertSee('Section I — who we are.');
+            ->assertSee('One pane at a time');
     }
 
     public function test_the_setup_section_shows_the_real_chart_with_its_facts_and_risk_line(): void
@@ -196,8 +197,7 @@ class HomePageTest extends TestCase
                 ->assertSeeInOrder(['XAUUSD', 'H1', '12 September 2026'])
                 ->assertDontSee('Outcome')
                 ->assertSee('A shared setup is education, not financial advice.')
-                ->assertSee('Section II — who we are.')
-                ->assertSee('Section III — how we teach.');
+                ->assertSeeInOrder(['Spot the setup', 'One pane at a time', 'One path, end to end']);
             $this->assertSame(4, substr_count($response->getContent(), 'href="https://t.me/+example"'));
         } finally {
             File::deleteDirectory(public_path($folder));
