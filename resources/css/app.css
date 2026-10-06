@@ -672,7 +672,7 @@ strong {
 
 .setup__points {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-10);
     margin-top: var(--space-12);
     padding-top: var(--space-9);
@@ -831,6 +831,14 @@ strong {
     text-shadow: var(--text-shadow-meta);
 }
 
+.story__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
+    margin-top: var(--space-12);
+}
+
 /* With no member screenshots, the panel holds a single pane: the trade record. */
 .proof--record {
     display: grid;
@@ -932,35 +940,6 @@ strong {
     max-width: 760px;
 }
 
-.stats {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-top: var(--space-12);
-}
-
-.stat {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: var(--space-3);
-    margin-top: var(--space-5);
-    color: var(--text-accent);
-    font-family: var(--font-mono);
-    font-style: normal;
-}
-
-.stat__value {
-    font-size: clamp(2.3rem, 4vw, var(--mono-hero));
-    font-weight: var(--mono-weight-bold);
-    line-height: 1;
-    letter-spacing: var(--mono-tracking);
-}
-
-.stat__unit {
-    font-size: var(--mono-2);
-    letter-spacing: var(--meta-tracking-tight);
-    text-transform: uppercase;
-}
-
 /* The steps sit on the same plate as the numbers: their borders overlap into one seam. */
 .steps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1006,6 +985,32 @@ strong {
     font-weight: var(--text-weight-semi);
     line-height: 1.1;
     text-wrap: balance;
+}
+
+/* The Academy's facts, said once: a short stacked list, each line led by a run of gold leading. */
+.academy__facts {
+    display: grid;
+    gap: var(--space-3);
+    margin-top: var(--space-7);
+    color: var(--text-emphasis);
+    font-family: var(--font-mono);
+    font-size: var(--mono-2);
+    font-style: normal;
+    letter-spacing: var(--mono-tracking);
+}
+
+.academy__facts li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+}
+
+.academy__facts li::before {
+    content: "";
+    flex: none;
+    width: var(--space-8);
+    height: 1px;
+    background: var(--border-strong);
 }
 
 .academy__body {
@@ -1442,7 +1447,6 @@ strong {
         height: var(--path-gap);
     }
 
-    .stats,
     .steps {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }

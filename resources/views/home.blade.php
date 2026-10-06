@@ -97,10 +97,6 @@
                     <p>The entry (where we get in), the stop (where we'd cut the loss) and the target (where we'd take profit), the way you'll see them on MetaTrader 5 or TradingView.</p>
                 </li>
                 <li class="setup__point">
-                    <h3 class="setup__point-title">Losses posted too.</h3>
-                    <p>Every setup we share stays on the record, win or lose.</p>
-                </li>
-                <li class="setup__point">
                     <h3 class="setup__point-title">Free to read along.</h3>
                     <p>Watch how we read the market for as long as you like. Leave anytime.</p>
                 </li>
@@ -120,29 +116,22 @@
             <div @class(['story__grid', 'story__grid--solo' => ! $showProof])>
                 <div class="story__text" data-reveal data-reveal-delay="120">
                     <h2 class="hook" id="story-title">One pane at a time</h2>
-                    <p class="lead">MosaicFX is a trading community that learns together. We show the wins and the losses, all of them, because trust is built on the whole picture, not a highlight reel.</p>
+                    <p class="lead">MosaicFX is a trading community that learns together, because trust is built on the whole picture, not a highlight reel.</p>
                     <p class="body">You don't have to figure this out alone, and you don't have to rush. A brand-new member isn't a lesser trader, just a pane that hasn't been placed yet.</p>
 
                     <ol class="values">
                         <li class="value">
                             <span class="value__num">01</span>
                             <div>
-                                <h3 class="value__title">Wins and losses, both shown.</h3>
-                                <p>No cherry-picked feed. You see the real record, good days and bad.</p>
-                            </div>
-                        </li>
-                        <li class="value">
-                            <span class="value__num">02</span>
-                            <div>
                                 <h3 class="value__title">We never chase you.</h3>
                                 <p>No countdowns, no "limited spots." You join when you're ready.</p>
                             </div>
                         </li>
                         <li class="value">
-                            <span class="value__num">03</span>
+                            <span class="value__num">02</span>
                             <div>
                                 <h3 class="value__title">Message us anytime.</h3>
-                                <p>Rattled by a trade? Message us. We'll help you think it through against your plan, but we won't tell you what to do with your money.</p>
+                                <p>Rattled by a trade? We'll help you think it through against your plan, but we won't tell you what to do with your money.</p>
                             </div>
                         </li>
                     </ol>
@@ -205,6 +194,12 @@
                 </div>
                 @endif
             </div>
+
+            {{-- The door again, right after the proof, so nobody scrolls the long middle without one. --}}
+            <div class="story__cta" data-reveal>
+                <x-telegram-button size="xl" />
+                <p class="cta-risk">Trading carries a high risk of loss. Education, not financial advice.</p>
+            </div>
         </div>
     </section>
 
@@ -216,48 +211,24 @@
 
             <div class="teach__intro" data-reveal data-reveal-delay="120">
                 <h2 class="hook" id="teach-title">One path, end to end</h2>
-                <p class="lead">Nobody becomes a trader in a day. We start from zero and stay with you the whole way, one pane at a time.</p>
+                <p class="lead">Nobody becomes a trader in a day. The lessons take about a week; the practice takes as long as you need, and we stay with you the whole way.</p>
             </div>
-
-            {{-- The numbers stand on their own band, apart from the path below. --}}
-            <ul class="plate-grid stats" data-reveal data-reveal-delay="160">
-                <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Mosaic Academy</span></span>
-                    <span class="stat"><span class="stat__value">21</span><span class="stat__unit">lessons</span></span>
-                    <span class="caption">Short, self-paced, with quiz breaks along the way.</span>
-                </li>
-                <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Pace</span></span>
-                    <span class="stat"><span class="stat__value">7</span><span class="stat__unit">days</span></span>
-                    <span class="caption">Three lessons a day, or slower if you like.</span>
-                </li>
-                <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Setups</span></span>
-                    <span class="stat"><span class="stat__value">Free</span></span>
-                    <span class="caption">Every setup we share, wins and losses both.</span>
-                </li>
-                <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Support</span></span>
-                    <span class="stat"><span class="stat__value">Direct</span><span class="stat__unit">messages</span></span>
-                    <span class="caption">Message us anytime. We help you think it through; the decision stays yours.</span>
-                </li>
-            </ul>
 
             <ol class="plate-grid steps" data-reveal data-reveal-delay="200">
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Step 01</span><span>The group</span></span>
                     <h3 class="step__title">Start in the free group.</h3>
-                    <p>Join our Telegram and watch how we read the market. Every setup we share is free, and we post the losses too.</p>
+                    <p>Join our Telegram and watch how we read the market. Every setup we share there is free.</p>
                 </li>
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Step 02</span><span>The academy</span></span>
                     <h3 class="step__title">Learn with Mosaic Academy.</h3>
-                    <p>Twenty-one short lessons, three a day for a week, at your own pace: the basics, then our backtested strategies, then the apps. <a class="step__link" href="#academy">See what's inside</a></p>
+                    <p>Twenty-one short lessons at your own pace: the basics, then our backtested strategies, then the apps. <a class="step__link" href="#academy">See what's inside</a></p>
                 </li>
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Step 03</span><span>Practice</span></span>
                     <h3 class="step__title">Practice with someone in your corner.</h3>
-                    <p>Start on a demo account, with practice money. There's no pressure to touch real money until you feel ready, and if a trade rattles you, message us.</p>
+                    <p>Start on a demo account, with practice money. There's no pressure to touch real money until you feel ready.</p>
                 </li>
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Step 04</span><span>Independence</span></span>
@@ -270,7 +241,13 @@
             <div class="academy" id="academy" data-reveal data-reveal-delay="120">
                 <div class="academy__intro">
                     <h3 class="academy__title" id="academy-title">Inside Mosaic Academy.</h3>
-                    <p class="academy__body">Each lesson pairs a short video with written notes, plus quick quiz breaks so nothing slips by. It runs in three stages, and each one builds on the last.</p>
+                    <ul class="academy__facts">
+                        <li>21 lessons</li>
+                        <li>Video + written notes</li>
+                        <li>Quiz breaks</li>
+                        <li>About 3 a day, at your own pace</li>
+                    </ul>
+                    <p class="academy__body">It runs in three stages, and each one builds on the last.</p>
                     <x-telegram-button label="Ask about the Academy in the group" variant="outline" class="academy__cta" />
                     <p class="academy__note">Access is arranged by an admin in our Telegram group.</p>
                 </div>

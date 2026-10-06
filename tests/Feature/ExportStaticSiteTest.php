@@ -39,7 +39,7 @@ class ExportStaticSiteTest extends TestCase
 
         $this->assertStringContainsString('<link rel="canonical" href="https://mosaicfx.pages.dev">', $html);
         $this->assertStringContainsString('https://mosaicfx.pages.dev/build/assets/', $html);
-        $this->assertSame(3, substr_count($html, 'href="https://t.me/+example"'));
+        $this->assertSame(4, substr_count($html, 'href="https://t.me/+example"'));
         $this->assertFileExists($this->out.'/build/manifest.json');
         $this->assertFileExists($this->out.'/images/og.jpg');
         $this->assertFileDoesNotExist($this->out.'/index.php');

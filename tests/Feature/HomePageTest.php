@@ -56,8 +56,8 @@ class HomePageTest extends TestCase
         $response = $this->get('/')->assertOk();
 
         $response->assertDontSee('data-telegram-placeholder', false);
-        // The hero, the Academy and the closing frame (the setup section adds a fourth once it has a chart).
-        $this->assertSame(3, substr_count($response->getContent(), 'href="https://t.me/+example"'));
+        // The hero, after the trade record, the Academy and the closing frame (the setup section adds a fifth once it has a chart).
+        $this->assertSame(4, substr_count($response->getContent(), 'href="https://t.me/+example"'));
     }
 
     public function test_every_image_in_the_testimonials_folder_reaches_the_proof_panel(): void
@@ -160,8 +160,11 @@ class HomePageTest extends TestCase
             ->assertSee('Ask about the Academy in the group')
             ->assertSee('MetaTrader 5, TradingView and Exness')
             ->assertSee('MosaicFX earns a commission if you open an account through our link.')
+            ->assertSeeInOrder(['21 lessons', 'Video + written notes', 'Quiz breaks', 'About 3 a day, at your own pace'])
             ->assertDontSee('Signals')
-            ->assertDontSee('1:1');
+            ->assertDontSee('1:1')
+            ->assertDontSee('7 days')
+            ->assertDontSee('plate-grid stats', false);
     }
 
     public function test_production_leaves_the_setup_section_out_until_a_chart_is_added(): void
@@ -198,7 +201,7 @@ class HomePageTest extends TestCase
                 ->assertDontSee('Outcome')
                 ->assertSee('A shared setup is education, not financial advice.')
                 ->assertSeeInOrder(['Spot the setup', 'One pane at a time', 'One path, end to end']);
-            $this->assertSame(4, substr_count($response->getContent(), 'href="https://t.me/+example"'));
+            $this->assertSame(5, substr_count($response->getContent(), 'href="https://t.me/+example"'));
         } finally {
             File::deleteDirectory(public_path($folder));
         }
@@ -225,7 +228,17 @@ class HomePageTest extends TestCase
             ->getContent();
 
         $this->assertSame(1, substr_count($content, '<h1'));
-        // Hero and closing frame each carry the one-line risk note beside the button.
-        $this->assertSame(2, substr_count($content, 'class="cta-risk"'));
+        // Hero, after the trade record and closing frame each carry the one-line risk note beside the button.
+        $this->assertSame(3, substr_count($content, 'class="cta-risk"'));
+    }
+
+    public function test_wins_and_losses_and_message_us_are_each_said_once(): void
+    {
+        config(['mosaic.trade_record.url' => 'https://example.com/record']);
+
+        $content = strtolower(strip_tags($this->get('/')->assertOk()->getContent()));
+
+        $this->assertSame(1, substr_count($content, 'wins and losses'));
+        $this->assertSame(1, substr_count($content, 'message us'));
     }
 }
