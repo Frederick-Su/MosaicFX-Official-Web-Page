@@ -8,10 +8,12 @@
     $record = config('mosaic.trade_record');
     $showRecord = filled($record['url']) || app()->isLocal();
     $showProof = $testimonials->isNotEmpty() || $showRecord;
+    // The shared setup appears only once a real chart is in the folder (locally, a reminder shows instead).
+    $showSetup = filled($setup) || app()->isLocal();
 @endphp
 
 @section('title', $name.' — '.$tagline)
-@section('description', 'MosaicFX is a forex trading education and signals community. Free signals in our Telegram group, the self-paced Mosaic Academy, and real support while you learn.')
+@section('description', 'MosaicFX teaches forex from zero: our own backtested strategies, hands-on MetaTrader 5, TradingView and Exness lessons, and free trade setups in our Telegram group.')
 
 @section('content')
 <main>
@@ -23,7 +25,7 @@
 
         <div class="plate-rule hero__rule" data-glass-keepout>
             <span>{{ $name }}</span>
-            <span>Plate 01<span class="meta-extra"> · Education &amp; signals</span></span>
+            <span>Plate 01<span class="meta-extra"> · Education &amp; setups</span></span>
         </div>
 
         <div class="hero__inner">
@@ -49,12 +51,75 @@
         </div>
     </section>
 
-    {{-- ============================================================ PLATE 02 — WHO WE ARE + MEMBER PROOF --}}
-    <section class="section story" id="story" aria-labelledby="story-title">
+    {{-- ============================================================ PLATE 02 — WHAT LANDS IN THE GROUP --}}
+    @if ($showSetup)
+    <section class="section setup" id="setups" aria-labelledby="setup-title">
         <div class="container">
             <header class="plate-header" data-reveal>
                 <span class="plate-header__plate">Plate 02</span>
-                <h2 class="plate-header__title" id="story-title">Section I — who we are.</h2>
+                <h2 class="plate-header__title" id="setup-title">Section I — what lands in the group.</h2>
+            </header>
+
+            <div class="setup__intro" data-reveal data-reveal-delay="120">
+                <p class="hook">Spot the setup</p>
+                <p class="lead">This is what we share in the free Telegram group: real setups on the chart, with the entry, the stop and the target marked.</p>
+            </div>
+
+            {{-- The one real chart, shown large in a leaded frame. It opens full size without any script. --}}
+            <figure class="setup__figure" data-reveal data-reveal-delay="160">
+                @if ($setup)
+                    <a class="setup__frame" href="{{ $setup['src'] }}" target="_blank" rel="noopener">
+                        <img
+                            src="{{ $setup['src'] }}"
+                            alt="{{ $setup['alt'] }}"
+                            width="{{ $setup['width'] }}"
+                            height="{{ $setup['height'] }}"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                        <span class="sr-only">Open the chart full size (opens in a new tab)</span>
+                    </a>
+                    @if ($setup['facts'])
+                        <figcaption class="setup__caption">
+                            @foreach ($setup['facts'] as $label => $value)
+                                <span class="setup__fact"><span class="setup__fact-label">{{ $label }}</span> {{ $value }}</span>
+                            @endforeach
+                        </figcaption>
+                    @endif
+                @else
+                    <p class="setup__unset">No setup chart yet. Add a real chart image (1600px wide or more) to public/images/setup/ and its details to config/mosaic.php. Production pages hide this section until it's there.</p>
+                @endif
+            </figure>
+            <p class="setup__risk" data-reveal data-reveal-delay="160">A shared setup is education, not financial advice. Past results don't guarantee future performance.</p>
+
+            <ul class="setup__points" data-reveal data-reveal-delay="200">
+                <li class="setup__point">
+                    <h3 class="setup__point-title">Marked on the chart.</h3>
+                    <p>Entry, stop and target, the way you'll see them on MetaTrader 5 or TradingView.</p>
+                </li>
+                <li class="setup__point">
+                    <h3 class="setup__point-title">Losses posted too.</h3>
+                    <p>Every setup we share stays on the record, win or lose.</p>
+                </li>
+                <li class="setup__point">
+                    <h3 class="setup__point-title">Free to read along.</h3>
+                    <p>Watch how we read the market for as long as you like. Leave anytime.</p>
+                </li>
+            </ul>
+
+            <div class="setup__cta" data-reveal data-reveal-delay="240">
+                <x-telegram-button size="xl" />
+            </div>
+        </div>
+    </section>
+    @endif
+
+    {{-- ============================================================ PLATE 03 — WHO WE ARE + MEMBER PROOF --}}
+    <section class="section story" id="story" aria-labelledby="story-title">
+        <div class="container">
+            <header class="plate-header" data-reveal>
+                <span class="plate-header__plate">Plate {{ $showSetup ? '03' : '02' }}</span>
+                <h2 class="plate-header__title" id="story-title">Section {{ $showSetup ? 'II' : 'I' }} — who we are.</h2>
             </header>
 
             <div @class(['story__grid', 'story__grid--solo' => ! $showProof])>
@@ -148,40 +213,41 @@
         </div>
     </section>
 
-    {{-- ============================================================ PLATE 03 — HOW WE TEACH --}}
+    {{-- ============================================================ PLATE 04 — HOW WE TEACH --}}
     <section class="section teach" id="how-we-teach" aria-labelledby="teach-title">
         <x-mosaic-texture class="teach__texture" :opacity="0.15" />
 
         <div class="container">
             <header class="plate-header" data-reveal>
-                <span class="plate-header__plate">Plate 03</span>
-                <h2 class="plate-header__title" id="teach-title">Section II — how we teach.</h2>
+                <span class="plate-header__plate">Plate {{ $showSetup ? '04' : '03' }}</span>
+                <h2 class="plate-header__title" id="teach-title">Section {{ $showSetup ? 'III' : 'II' }} — how we teach.</h2>
             </header>
 
             <div class="teach__intro" data-reveal data-reveal-delay="120">
-                <p class="hook">Spot the setup</p>
-                <p class="lead">Nobody becomes a trader in a day. We go one pane at a time, and we stay with you the whole way.</p>
+                <p class="hook">One path, end to end</p>
+                <p class="lead">Nobody becomes a trader in a day. We start from zero and stay with you the whole way, one pane at a time.</p>
             </div>
 
+            {{-- The numbers stand on their own band, apart from the path below. --}}
             <ul class="plate-grid stats" data-reveal data-reveal-delay="160">
                 <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Mosaic Academy</span><span class="plate-cell__fig">Fig. 3A</span></span>
+                    <span class="plate-cell__head"><span>Mosaic Academy</span><span class="plate-cell__fig">Fig. 4A</span></span>
                     <span class="stat"><span class="stat__value">21</span><span class="stat__unit">lessons</span></span>
                     <span class="caption">Short, self-paced, with quiz breaks along the way.</span>
                 </li>
                 <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Pace</span><span class="plate-cell__fig">Fig. 3B</span></span>
+                    <span class="plate-cell__head"><span>Pace</span><span class="plate-cell__fig">Fig. 4B</span></span>
                     <span class="stat"><span class="stat__value">7</span><span class="stat__unit">days</span></span>
                     <span class="caption">Three lessons a day, or slower if you like.</span>
                 </li>
                 <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Signals</span><span class="plate-cell__fig">Fig. 3C</span></span>
-                    <span class="stat"><span class="stat__value">100%</span><span class="stat__unit">free</span></span>
-                    <span class="caption">Every signal we share, wins and losses both.</span>
+                    <span class="plate-cell__head"><span>Setups</span><span class="plate-cell__fig">Fig. 4C</span></span>
+                    <span class="stat"><span class="stat__value">Free</span></span>
+                    <span class="caption">Every setup we share, wins and losses both.</span>
                 </li>
                 <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Support</span><span class="plate-cell__fig">Fig. 3D</span></span>
-                    <span class="stat"><span class="stat__value">1:1</span></span>
+                    <span class="plate-cell__head"><span>Support</span><span class="plate-cell__fig">Fig. 4D</span></span>
+                    <span class="stat"><span class="stat__value">Direct</span><span class="stat__unit">messages</span></span>
                     <span class="caption">Message us anytime, especially mid-trade.</span>
                 </li>
             </ul>
@@ -190,12 +256,12 @@
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Step 01</span><span>The group</span></span>
                     <h3 class="step__title">Start in the free group.</h3>
-                    <p>Join our Telegram and watch how we read the market. Every signal we share is free, and we post the losses too.</p>
+                    <p>Join our Telegram and watch how we read the market. Every setup we share is free, and we post the losses too.</p>
                 </li>
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Step 02</span><span>The academy</span></span>
                     <h3 class="step__title">Learn with Mosaic Academy.</h3>
-                    <p>Twenty-one short lessons, three a day for a week, at your own pace. Each pairs a short video with written notes, plus quick quiz breaks so nothing slips by.</p>
+                    <p>Twenty-one short lessons, three a day for a week, at your own pace: the basics, then our backtested strategies, then the apps. <a class="step__link" href="#academy">See what's inside</a></p>
                 </li>
                 <li class="plate-cell">
                     <span class="plate-cell__head"><span>Step 03</span><span>Practice</span></span>
@@ -208,10 +274,39 @@
                     <p>The goal is independence: reading setups yourself, not waiting on our calls forever. Trade the law, not the feeling.</p>
                 </li>
             </ol>
+
+            {{-- Step 02 opened up: the three stages as panes joined by gold leading, one after the other. --}}
+            <div class="academy" id="academy" data-reveal data-reveal-delay="120">
+                <div class="academy__intro">
+                    <h3 class="academy__title" id="academy-title">Inside Mosaic Academy.</h3>
+                    <p class="academy__body">Each lesson pairs a short video with written notes, plus quick quiz breaks so nothing slips by. It runs in three stages, and each one builds on the last.</p>
+                    <x-telegram-button label="Ask about the Academy in the group" variant="outline" class="academy__cta" />
+                    <p class="academy__note">Access is arranged by an admin in our Telegram group.</p>
+                </div>
+
+                <ol class="academy__path">
+                    <li class="academy__stage glass-card">
+                        <span class="academy__stage-num">Stage 1</span>
+                        <h4 class="academy__stage-title">Trading from zero.</h4>
+                        <p>No prior knowledge assumed. The basics of how a trade works come first, and each lesson builds on the last.</p>
+                    </li>
+                    <li class="academy__stage glass-card">
+                        <span class="academy__stage-num">Stage 2</span>
+                        <h4 class="academy__stage-title">MosaicFX strategies.</h4>
+                        <p>The professional strategies we built and backtested ourselves.</p>
+                    </li>
+                    <li class="academy__stage glass-card">
+                        <span class="academy__stage-num">Stage 3</span>
+                        <h4 class="academy__stage-title">The apps, hands-on.</h4>
+                        <p>MetaTrader 5, TradingView and Exness, taught step by step as you'll actually see them.</p>
+                        <p class="academy__disclosure">Exness is our recommended broker. MosaicFX earns a commission if you open an account through our link.</p>
+                    </li>
+                </ol>
+            </div>
         </div>
     </section>
 
-    {{-- ============================================================ PLATE 04 — CLOSING FRAME --}}
+    {{-- ============================================================ PLATE 05 — CLOSING FRAME --}}
     <section class="join" id="join" aria-labelledby="join-title">
         <canvas class="glass-canvas" data-glass="join" aria-hidden="true"></canvas>
         <x-mosaic-texture class="join__texture" :opacity="0.5" />
@@ -248,7 +343,7 @@
         </div>
 
         <div class="footer__legal">
-            <p><strong>Risk disclaimer.</strong> Trading forex, gold and other leveraged products carries a high level of risk and may not be suitable for everyone. Past results do not guarantee future performance. Never risk more than you can afford to lose. Everything {{ $name }} shares is for education only and is not financial advice.</p>
+            <p><strong>Risk disclaimer.</strong> Trading forex, gold and other leveraged products carries a high level of risk and may not be suitable for everyone. Past results do not guarantee future performance. Never risk more than you can afford to lose. Everything {{ $name }} shares is for education only and is not financial advice. {{ $name }} earns a commission if you open an Exness account through our link.</p>
             <p class="footer__line">Small pieces. Long game.</p>
             <p class="meta">&copy; {{ date('Y') }} {{ $name }}</p>
         </div>

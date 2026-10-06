@@ -52,6 +52,28 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Shared setup
+    |--------------------------------------------------------------------------
+    |
+    | "What lands in the group" shows one real chart from a setup you shared:
+    | the first image in this folder (inside /public), ideally 1600px wide or
+    | more, with the entry, stop and target marked. Fill in the facts below as
+    | you want them read; any left empty are simply not shown. Until an image
+    | is in the folder, a production page leaves the section out. Never use a
+    | mocked-up chart.
+    |
+    */
+
+    'setup' => [
+        'path' => 'images/setup',
+        'pair' => null,       // e.g. 'XAUUSD'
+        'timeframe' => null,  // e.g. 'H1'
+        'shared' => null,     // e.g. '12 September 2026'
+        'outcome' => null,    // e.g. 'Hit target' or 'Stopped out'
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Testimonials
     |--------------------------------------------------------------------------
     |

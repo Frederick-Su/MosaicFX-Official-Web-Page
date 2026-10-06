@@ -598,6 +598,100 @@ strong {
     opacity: 1;
 }
 
+/* ===================================================================== plate 02 — what lands in the group */
+
+.setup__intro {
+    max-width: 760px;
+    margin-top: var(--gap-section);
+}
+
+.setup__figure {
+    margin-top: var(--space-12);
+}
+
+/* The chart sits in a frame of the brand's own leading: a 2.2px gold edge around clear glass. */
+.setup__frame {
+    display: block;
+    padding: var(--space-3);
+    border: var(--leading-width) solid var(--border-strong);
+    background: var(--glass-fill);
+    cursor: zoom-in;
+    transition: var(--transition-interactive);
+}
+
+.setup__frame:hover {
+    border-color: var(--text-emphasis);
+    box-shadow: var(--glow-hover);
+}
+
+.setup__frame img {
+    width: 100%;
+    height: auto;
+    background: var(--surface-base);
+}
+
+.setup__caption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-10);
+    padding-block: var(--space-6);
+    border-bottom: var(--border-hair);
+    color: var(--text-body);
+    font-family: var(--font-mono);
+    font-size: var(--mono-2);
+    font-style: normal;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: var(--mono-tracking);
+}
+
+.setup__fact-label {
+    margin-right: var(--space-3);
+    color: var(--text-meta);
+    letter-spacing: var(--meta-tracking-tight);
+    text-transform: uppercase;
+}
+
+.setup__unset {
+    padding: var(--space-9);
+    border: 1px dashed var(--border-card);
+    color: var(--text-body);
+    font-size: var(--text-5);
+}
+
+.setup__risk {
+    margin-top: var(--space-6);
+    color: var(--text-body);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
+}
+
+.setup__points {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-10);
+    margin-top: var(--space-12);
+    padding-top: var(--space-9);
+    border-top: var(--border-hair);
+}
+
+.setup__point-title {
+    color: var(--text-body);
+    font-size: var(--text-4);
+    font-weight: var(--text-weight-semi);
+    line-height: var(--text-leading-tight);
+}
+
+.setup__point p {
+    margin-top: var(--space-3);
+    color: var(--text-meta);
+    font-size: var(--text-5);
+    line-height: var(--text-leading);
+}
+
+.setup__cta {
+    margin-top: var(--space-12);
+}
+
 /* ===================================================================== plate 02 — who we are */
 
 .story__grid {
@@ -853,6 +947,7 @@ strong {
 
 .stat {
     display: flex;
+    flex-wrap: wrap;
     align-items: baseline;
     gap: var(--space-3);
     margin-top: var(--space-5);
@@ -877,7 +972,126 @@ strong {
 /* The steps sit on the same plate as the numbers: their borders overlap into one seam. */
 .steps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-top: -1px;
+    margin-top: var(--space-12);
+}
+
+.step__link {
+    display: inline-block;
+    margin-top: var(--space-3);
+    color: var(--link-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.step__link:hover {
+    color: var(--link-color-hover);
+}
+
+/* ------------------------------------------------- the academy: three stages joined by leading */
+
+.academy {
+    display: grid;
+    gap: var(--space-11);
+    margin-top: var(--space-13);
+    padding-top: var(--space-11);
+    border-top: var(--border-plate);
+    scroll-margin-top: var(--space-11);
+}
+
+.academy__intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 640px;
+}
+
+.academy__title {
+    color: var(--text-display);
+    font-size: clamp(var(--text-2), 3vw, var(--text-1));
+    font-weight: var(--text-weight-semi);
+    line-height: 1.1;
+    text-wrap: balance;
+}
+
+.academy__body {
+    margin-top: var(--space-6);
+    color: var(--text-body);
+    font-size: var(--text-5);
+    line-height: var(--text-leading-loose);
+    text-wrap: pretty;
+}
+
+.academy__cta {
+    min-height: 44px;
+    margin-top: var(--space-9);
+    max-width: 100%;
+    white-space: normal;
+}
+
+.academy__note {
+    margin-top: var(--space-5);
+    color: var(--text-meta);
+    font-size: var(--text-small);
+}
+
+.academy__path {
+    --path-gap: var(--space-11);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--path-gap);
+}
+
+.academy__stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    min-width: 0;
+}
+
+/* The leading that joins one pane to the next. */
+.academy__stage + .academy__stage::before {
+    content: "";
+    position: absolute;
+    top: var(--space-12);
+    left: calc(-1 * var(--path-gap) - 1px);
+    width: var(--path-gap);
+    height: var(--leading-width);
+    background: var(--border-strong);
+}
+
+.academy__stage-num {
+    color: var(--text-emphasis);
+    font-family: var(--font-mono);
+    font-size: var(--mono-2);
+    font-style: normal;
+    letter-spacing: var(--meta-tracking-tight);
+    text-transform: uppercase;
+}
+
+.academy__stage-title {
+    margin: 0;
+    color: var(--text-body);
+    font-size: var(--text-3);
+    font-weight: var(--text-weight-semi);
+    line-height: var(--text-leading-tight);
+    text-wrap: balance;
+}
+
+.academy__stage p {
+    color: var(--text-body);
+    font-size: var(--text-5);
+    line-height: var(--text-leading-loose);
+}
+
+.academy__stage .academy__disclosure {
+    margin-top: auto;
+    padding-top: var(--space-5);
+    border-top: var(--border-hair);
+    color: var(--text-meta);
+    font-size: var(--text-small);
+    line-height: var(--text-leading);
 }
 
 .step__title {
@@ -1235,6 +1449,27 @@ strong {
 @media (max-width: 1023px) {
     .story__grid {
         grid-template-columns: minmax(0, 1fr);
+    }
+
+    .setup__points,
+    .academy__path {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .setup__points {
+        gap: var(--space-8);
+    }
+
+    .academy__path {
+        --path-gap: var(--space-9);
+    }
+
+    /* Stacked, the leading runs down from one pane to the next. */
+    .academy__stage + .academy__stage::before {
+        top: calc(-1 * var(--path-gap) - 1px);
+        left: var(--space-11);
+        width: var(--leading-width);
+        height: var(--path-gap);
     }
 
     .stats,

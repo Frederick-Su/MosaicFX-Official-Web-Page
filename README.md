@@ -3,9 +3,10 @@
 A one-page site for the Mosaic FX trading community, built with Laravel 12 and styled to the **Mosaic FX Design System**. The sections, in order:
 
 - **Plate 01, the cover.** The coin, the MOSAIC FX wordmark and the locked tagline, with loose stained-glass panes floating around them. Below the button, the brand's leaded texture rises out of the dark. Now and then a pane warms to Bright Gold.
-- **Plate 02, who we are.** Text on the left; on the right, a glass pane over the texture linking to the full trade record, with member screenshots above it once real ones are added.
-- **Plate 03, how we teach.** An Editorial Plate grid of numbers and steps.
-- **Plate 04, the closing frame.** The coin lockup and the one ask: "Join our Telegram Group".
+- **Plate 02, what lands in the group.** One real setup chart you shared, shown large in a gold-leaded frame with its pair, timeframe, date and outcome, a risk line, three short points and the Telegram button. It appears once a chart is in `public/images/setup/`.
+- **Plate 03, who we are.** Text on the left; on the right, a glass pane over the texture linking to the full trade record, with member screenshots above it once real ones are added.
+- **Plate 04, how we teach.** The numbers on their own band, the four steps, then Mosaic Academy's three stages (basics, MosaicFX strategies, the apps) joined by gold leading, with the way in through the Telegram group and the Exness affiliate disclosure.
+- **Plate 05, the closing frame.** The coin lockup and the one ask: "Join our Telegram Group".
 
 ## Run it locally
 
@@ -36,6 +37,7 @@ Then open http://127.0.0.1:8000. While you're editing CSS or JS, run `npm run de
 |---|---|
 | **Telegram link** | `.env` → `MOSAIC_TELEGRAM_URL=https://t.me/...` (until it's set, the buttons show a "link coming soon" notice) |
 | Wordmark and tagline | `config/mosaic.php` (the tagline is the design system's locked line; don't reword it) |
+| **Setup chart** | `public/images/setup/`: one real chart image from a setup you shared, 1600px wide or more, with entry, stop and target marked. Its pair, timeframe, date and outcome go in `config/mosaic.php` → `setup`. Until an image is there, production pages leave the section out. Never use a mocked-up chart. |
 | **Trade record** | `.env` → `MOSAIC_TRADE_RECORD_URL`, plus `MOSAIC_TRADE_RECORD_FROM` (e.g. `"March 2024"`) and, once it's closed, `MOSAIC_TRADE_RECORD_TO`. Until the link is set, production pages leave the proof panel out; local pages show a reminder. |
 | **Member screenshots** | `public/images/testimonials/`: add real, permitted screenshots (jpg, png, webp…), named `01-…`, `02-…` for order. The first four show above the trade record; if there are more, one frame at a time fades to the next. Files named `placeholder-*` are always skipped. |
 | Page text | `resources/views/home.blade.php` |

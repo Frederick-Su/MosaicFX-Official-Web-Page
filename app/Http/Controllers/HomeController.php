@@ -15,6 +15,7 @@ class HomeController extends Controller
     {
         return view('home', [
             'testimonials' => $this->testimonials(),
+            'setup' => $this->setup(),
         ]);
     }
 
@@ -46,6 +47,52 @@ class HomeController extends Controller
                     'height' => $height,
                 ];
             });
+    }
+
+    /**
+     * The shared setup chart: the first image in the configured folder, with its caption facts.
+     *
+     * @return array{src: string, alt: string, width: int, height: int, facts: array<string, string>}|null
+     */
+    private function setup(): ?array
+    {
+        $config = config('mosaic.setup');
+        $relative = trim($config['path'], '/');
+        $directory = public_path($relative);
+
+        if (! File::isDirectory($directory)) {
+            return null;
+        }
+
+        $file = collect(File::files($directory))
+            ->filter(fn (SplFileInfo $file) => in_array(strtolower($file->getExtension()), self::IMAGE_EXTENSIONS))
+            ->reject(fn (SplFileInfo $file) => str_starts_with(strtolower($file->getFilename()), 'placeholder'))
+            ->sort(fn (SplFileInfo $a, SplFileInfo $b) => strnatcasecmp($a->getFilename(), $b->getFilename()))
+            ->first();
+
+        if (! $file) {
+            return null;
+        }
+
+        [$width, $height] = $this->dimensions($file);
+
+        $facts = collect([
+            'Pair' => $config['pair'],
+            'Timeframe' => $config['timeframe'],
+            'Shared' => $config['shared'],
+            'Outcome' => $config['outcome'],
+        ])->filter(fn ($value) => filled($value))->all();
+
+        $subject = trim(implode(' ', array_filter([$config['pair'], $config['timeframe']])));
+
+        return [
+            'src' => asset($relative.'/'.rawurlencode($file->getFilename())).'?v='.$file->getMTime(),
+            'alt' => 'A MosaicFX setup'.($subject ? ' on '.$subject : '').' with the entry, stop and target marked on the chart'
+                .($config['shared'] ? ', shared '.$config['shared'] : '').'.',
+            'width' => $width,
+            'height' => $height,
+            'facts' => $facts,
+        ];
     }
 
     /**

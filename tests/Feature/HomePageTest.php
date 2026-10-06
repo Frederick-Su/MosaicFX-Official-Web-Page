@@ -55,7 +55,8 @@ class HomePageTest extends TestCase
         $response = $this->get('/')->assertOk();
 
         $response->assertDontSee('data-telegram-placeholder', false);
-        $this->assertSame(2, substr_count($response->getContent(), 'href="https://t.me/+example"'));
+        // The hero, the Academy and the closing frame (the setup section adds a fourth once it has a chart).
+        $this->assertSame(3, substr_count($response->getContent(), 'href="https://t.me/+example"'));
     }
 
     public function test_every_image_in_the_testimonials_folder_reaches_the_proof_panel(): void
@@ -148,5 +149,69 @@ class HomePageTest extends TestCase
             ->assertOk()
             ->assertSee('The full trade record.')
             ->assertSee('MOSAIC_TRADE_RECORD_URL');
+    }
+
+    public function test_the_academy_shows_its_three_stages_and_the_way_in_without_a_price(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertSeeInOrder(['Inside Mosaic Academy.', 'Trading from zero.', 'MosaicFX strategies.', 'The apps, hands-on.'])
+            ->assertSee('Ask about the Academy in the group')
+            ->assertSee('MetaTrader 5, TradingView and Exness')
+            ->assertSee('MosaicFX earns a commission if you open an account through our link.')
+            ->assertDontSee('Signals')
+            ->assertDontSee('1:1');
+    }
+
+    public function test_production_leaves_the_setup_section_out_until_a_chart_is_added(): void
+    {
+        $this->app['env'] = 'production';
+        config(['mosaic.setup.path' => 'images/does-not-exist']);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertDontSee('id="setups"', false)
+            ->assertSee('Section I — who we are.');
+    }
+
+    public function test_the_setup_section_shows_the_real_chart_with_its_facts_and_risk_line(): void
+    {
+        $folder = 'images/setup-test';
+        File::ensureDirectoryExists(public_path($folder));
+        File::put(public_path($folder.'/placeholder-chart.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"></svg>');
+        File::put(public_path($folder.'/xauusd-h1.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"></svg>');
+        config([
+            'mosaic.telegram_url' => 'https://t.me/+example',
+            'mosaic.setup' => ['path' => $folder, 'pair' => 'XAUUSD', 'timeframe' => 'H1', 'shared' => '12 September 2026', 'outcome' => null],
+        ]);
+
+        try {
+            $response = $this->get('/')->assertOk();
+
+            $response
+                ->assertSee('id="setups"', false)
+                ->assertSee('xauusd-h1.svg', false)
+                ->assertDontSee('placeholder-chart.svg', false)
+                ->assertSee('width="1600"', false)
+                ->assertSeeInOrder(['XAUUSD', 'H1', '12 September 2026'])
+                ->assertDontSee('Outcome')
+                ->assertSee('A shared setup is education, not financial advice.')
+                ->assertSee('Section II — who we are.')
+                ->assertSee('Section III — how we teach.');
+            $this->assertSame(4, substr_count($response->getContent(), 'href="https://t.me/+example"'));
+        } finally {
+            File::deleteDirectory(public_path($folder));
+        }
+    }
+
+    public function test_locally_a_missing_chart_shows_a_reminder(): void
+    {
+        $this->app['env'] = 'local';
+        config(['mosaic.setup.path' => 'images/does-not-exist']);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('id="setups"', false)
+            ->assertSee('No setup chart yet.');
     }
 }
