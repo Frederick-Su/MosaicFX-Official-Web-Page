@@ -15,7 +15,8 @@
     color-scheme: dark;
     --container: var(--content-max);
     --gutter: clamp(16px, 4vw, 40px);
-    --section-space: clamp(88px, 11vw, 144px);
+    /* Section breathing room: generous, but no longer a screen of empty dark between plates. */
+    --section-space: clamp(72px, 8vw, 112px);
 }
 
 /* ===================================================================== base */
@@ -428,7 +429,7 @@ strong {
 
 /* The coin: the brand's only illustration, with 0.25× clear space beneath it. */
 .hero__coin {
-    width: clamp(190px, 25vh, 280px);
+    width: clamp(150px, 20vh, 240px);
     margin-bottom: clamp(36px, 5vh, 56px);
 }
 
@@ -1127,7 +1128,7 @@ strong {
     isolation: isolate;
     display: grid;
     place-items: center;
-    min-height: clamp(640px, 92svh, 920px);
+    min-height: clamp(560px, 72svh, 760px);
     padding: var(--section-space) var(--gutter);
     overflow: hidden;
     background: var(--surface-base);
@@ -1155,30 +1156,8 @@ strong {
     box-shadow: var(--glow-coin);
 }
 
-.join__wordmark {
-    color: var(--text-display);
-    font-family: var(--font-text);
-    font-size: clamp(2.8rem, 7vw, 4.25rem);
-    font-style: var(--text-style-voice);
-    font-weight: var(--text-weight-semi);
-    line-height: 1;
-    letter-spacing: var(--display-tracking);
-    text-shadow: var(--text-shadow-hook);
-}
-
-.join__tagline {
-    font-style: var(--text-style-voice);
-    margin-top: var(--space-4);
-    color: var(--text-body);
-    font-size: var(--text-4);
-    font-weight: var(--text-weight-semi);
-}
-
 .join__title {
     width: 100%;
-    margin-top: var(--space-10);
-    padding-top: var(--space-10);
-    border-top: var(--border-hair);
     color: var(--text-accent);
     font-size: clamp(var(--text-2), 3vw, var(--text-1));
     font-weight: var(--text-weight-semi);
@@ -1207,21 +1186,6 @@ strong {
 .footer {
     padding-bottom: var(--space-11);
     background: var(--surface-base);
-}
-
-.footer__rule {
-    border-top: var(--border-plate);
-    border-bottom: 0;
-}
-
-.footer__tagline {
-    color: var(--text-body);
-    font-family: var(--font-text);
-    font-size: var(--text-5);
-    font-style: var(--text-style-voice);
-    font-weight: var(--text-weight-semi);
-    letter-spacing: normal;
-    text-transform: none;
 }
 
 .footer__top {
@@ -1456,6 +1420,7 @@ strong {
        screen. The coin keeps its size; the wordmark and the gaps give way instead. */
     .hero {
         padding-top: clamp(40px, 5vh, 120px);
+        padding-bottom: clamp(120px, 18vh, 220px);
     }
 
     .hero__wordmark {
@@ -1500,7 +1465,8 @@ strong {
 }
 
 @media (max-width: 639px) {
-    .hero__rule .meta-extra {
+    /* On phones a loose pane drifts across the corner, and the hero offer already says what this is. */
+    .hero__rule span + span {
         display: none;
     }
 

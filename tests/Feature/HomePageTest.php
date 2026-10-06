@@ -24,7 +24,7 @@ class HomePageTest extends TestCase
             ->assertSee('<h2 class="hook" id="teach-title">One path, end to end</h2>', false)
             ->assertDontSee('plate-header', false)
             ->assertSee('We build the picture together.')
-            ->assertSee('End of Plate')
+            ->assertDontSee('End of Plate')
             ->assertSee('Risk disclaimer.', false);
     }
 

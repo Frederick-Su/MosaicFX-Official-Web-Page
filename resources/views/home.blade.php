@@ -25,7 +25,7 @@
 
         <div class="plate-rule hero__rule" data-glass-keepout>
             <span>{{ $name }}</span>
-            <span>Plate 01<span class="meta-extra"> · Education &amp; setups</span></span>
+            <span>Education &amp; setups</span>
         </div>
 
         <div class="hero__inner">
@@ -304,8 +304,6 @@
 
         <div class="join__card glass-card" data-glass-keepout data-reveal>
             <img class="join__coin" src="{{ asset('images/brand/coin-512.webp') }}" alt="" width="512" height="512" loading="lazy">
-            <p class="join__wordmark">{{ $name }}</p>
-            <p class="join__tagline">{{ $tagline }}</p>
             <h2 class="join__title" id="join-title">We build the picture together.</h2>
             <p class="join__body">Join the free Telegram group. Read along, ask anything, and start when you're ready. No pressure, no countdowns.</p>
             <x-telegram-button size="xl" />
@@ -317,10 +315,6 @@
 
 <footer class="footer">
     <div class="container">
-        <div class="plate-rule footer__rule">
-            <span class="footer__tagline">{{ $tagline }}</span>
-            <span>End of Plate</span>
-        </div>
 
         <div class="footer__top">
             <a class="footer__brand" href="#top">
