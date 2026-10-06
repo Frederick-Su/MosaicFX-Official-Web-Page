@@ -162,22 +162,6 @@ strong {
     line-height: var(--text-leading);
 }
 
-.badge {
-    display: inline-block;
-    padding: var(--space-2) var(--space-4);
-    border: var(--border-hair);
-    background: var(--surface-glass-tint);
-    -webkit-backdrop-filter: var(--glass-blur);
-    backdrop-filter: var(--glass-blur);
-    color: var(--text-meta);
-    font-family: var(--font-mono);
-    font-size: var(--meta-xs);
-    font-style: normal;
-    letter-spacing: var(--meta-tracking-tight);
-    line-height: 1.1;
-    text-transform: uppercase;
-}
-
 /* ===================================================================== plate furniture */
 
 /* The tracked mono rule that opens and closes a web plate. */
@@ -767,20 +751,6 @@ strong {
     padding: clamp(18px, 3vw, var(--pad-plate));
     overflow: hidden;
     border: var(--border-hair);
-}
-
-.proof__head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-5);
-    margin-bottom: var(--space-8);
-}
-
-.proof__head .meta {
-    color: var(--bright-gold);
-    text-shadow: var(--text-shadow-meta);
 }
 
 .proof__grid {
@@ -1472,10 +1442,6 @@ strong {
 
     .steps {
         grid-template-columns: minmax(0, 1fr);
-    }
-
-    .plate-cell__fig {
-        display: none;
     }
 
     .proof__grid {

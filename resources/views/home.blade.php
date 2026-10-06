@@ -222,22 +222,22 @@
             {{-- The numbers stand on their own band, apart from the path below. --}}
             <ul class="plate-grid stats" data-reveal data-reveal-delay="160">
                 <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Mosaic Academy</span><span class="plate-cell__fig">Fig. 4A</span></span>
+                    <span class="plate-cell__head"><span>Mosaic Academy</span></span>
                     <span class="stat"><span class="stat__value">21</span><span class="stat__unit">lessons</span></span>
                     <span class="caption">Short, self-paced, with quiz breaks along the way.</span>
                 </li>
                 <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Pace</span><span class="plate-cell__fig">Fig. 4B</span></span>
+                    <span class="plate-cell__head"><span>Pace</span></span>
                     <span class="stat"><span class="stat__value">7</span><span class="stat__unit">days</span></span>
                     <span class="caption">Three lessons a day, or slower if you like.</span>
                 </li>
                 <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Setups</span><span class="plate-cell__fig">Fig. 4C</span></span>
+                    <span class="plate-cell__head"><span>Setups</span></span>
                     <span class="stat"><span class="stat__value">Free</span></span>
                     <span class="caption">Every setup we share, wins and losses both.</span>
                 </li>
                 <li class="plate-cell">
-                    <span class="plate-cell__head"><span>Support</span><span class="plate-cell__fig">Fig. 4D</span></span>
+                    <span class="plate-cell__head"><span>Support</span></span>
                     <span class="stat"><span class="stat__value">Direct</span><span class="stat__unit">messages</span></span>
                     <span class="caption">Message us anytime. We help you think it through; the decision stays yours.</span>
                 </li>
