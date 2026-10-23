@@ -1,0 +1,4 @@
+# Files in public/ that Cloudflare must NOT upload (Laravel's PHP entry point and Apache config).
+index.php
+.htaccess
+.assetsignore
